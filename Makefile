@@ -5,22 +5,23 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/01 11:38:26 by ktbatou           #+#    #+#              #
-#    Updated: 2019/11/01 12:25:55 by ktbatou          ###   ########.fr        #
+#    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
+#    Updated: 2019/11/01 14:52:03 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-SRC = ./*.c
-HEADER = ./*.h
+NAME =  printf.a
+SRC = ft_printf.c conv_c.c conv_s.c main.c  libft/ft_putstr.c libft/ft_putchar.c libft/ft_strlen.c libft/ft_strnew.c
+HDR = ft_printf.h
 
 all : $(NAME)
 
 $(NAME) :
-	gcc -Wextra -Werror -Wall -c $(SRC) -I $(HEADER)
-	ar rc $(NAME) ./*.o
+	gcc  -c $(SRC) -I $(HDR)
+	ar rc $(NAME) ft_printf.o conv_c.o conv_s.o main.o ft_putstr.o ft_putchar.o ft_strlen.o ft_strnew.o
+
 clean :
-	rm -f *.o
+		rm -f *.o
 fclean : clean
-	rm -f $(NAME)
+		rm -f $(NAME)
 re : fclean all

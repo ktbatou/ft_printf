@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   conc_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 13:11:18 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/30 13:12:34 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/10/29 14:17:19 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/03 15:11:58 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcat(char *dst, char *src, size_t size)
+int	conv_s(char *s1, va_list s2)
 {
-	size_t dstsize;
-	size_t srcsize;
-	size_t i;
-	size_t j;
-
-	dstsize = ft_strlen(dst);
-	srcsize = ft_strlen(src);
-	j = 0;
-	if (dstsize >= size)
-		return (srcsize + size);
-	else
-	{
-		i = srcsize + dstsize;
-		while (src[j] && dstsize < size - 1)
-		{
-			dst[dstsize] = src[j];
-			j++;
-			dstsize++;
-		}
-		dst[dstsize] = '\0';
-		return (i);
-	}
+	char *str;
+	int i;
+	
+	i = 0;
+	str = va_arg(s2, char*);
+	//return (ft_strlen(ft_putstr(ft_strdup(va_arg(s2, char*)))));
+	//va_arg(s2, char*);
+	while(str[i])
+		ft_putchar(str[i++]);
+	return (ft_strlen(str));
 }
+

@@ -6,24 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/29 14:09:49 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/10/31 14:13:28 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int		ft_size(char *s)
+void 	conv_c(char *s1, va_list s2)
 {
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char 	c(char s, int n)
-{
-	s = n;
-	return (s);
+	ft_putchar(va_arg(s2, int));
 }
 

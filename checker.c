@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 13:11:18 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/30 13:12:34 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/11/03 15:13:26 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/03 18:40:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcat(char *dst, char *src, size_t size)
+int  checker(char *str, va_list ap, char *s )
 {
-	size_t dstsize;
-	size_t srcsize;
-	size_t i;
-	size_t j;
-
-	dstsize = ft_strlen(dst);
-	srcsize = ft_strlen(src);
-	j = 0;
-	if (dstsize >= size)
-		return (srcsize + size);
-	else
+	int format;
+	
+	format = 0;
+	
+	//printf(" ========> %c\n",str);
+	/*if (*str >= '0' && *str <= '9')
 	{
-		i = srcsize + dstsize;
-		while (src[j] && dstsize < size - 1)
-		{
-			dst[dstsize] = src[j];
-			j++;
-			dstsize++;
-		}
-		dst[dstsize] = '\0';
-		return (i);
+		check_num(*str);
+		*str++;
 	}
+	if (*str == '%')
+	{
+		ft_putchar('%');
+		*str++;
+	}
+	if (*str == 's')
+		format += conv_s(s, ap);
+		*str++;
+	}
+	if (*str == 'c')
+	{
+		conv_c(s, ap);
+		format++;
+	}*/
+	return (format);
 }

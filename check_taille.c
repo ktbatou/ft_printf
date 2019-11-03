@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   check_taille.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/31 13:11:18 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/30 13:12:34 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/11/02 12:30:31 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/03 16:51:39 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcat(char *dst, char *src, size_t size)
+int		check_num(char *str)
 {
-	size_t dstsize;
-	size_t srcsize;
-	size_t i;
-	size_t j;
+	int a;
 
-	dstsize = ft_strlen(dst);
-	srcsize = ft_strlen(src);
-	j = 0;
-	if (dstsize >= size)
-		return (srcsize + size);
-	else
+	a = 0;
+	if (*str >= '0' && *str <= '9')
 	{
-		i = srcsize + dstsize;
-		while (src[j] && dstsize < size - 1)
-		{
-			dst[dstsize] = src[j];
-			j++;
-			dstsize++;
-		}
-		dst[dstsize] = '\0';
-		return (i);
-	}
+		a = atoi(str);
+		while (a-- >= 0)	
+			ft_putchar(' ');
+	} 
+	return (0);
 }
