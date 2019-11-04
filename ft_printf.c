@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:51:28 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/03 18:41:42 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/04 15:11:29 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,8 @@ int		ft_printf(char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			printf("%c\n", str + i);
-			//checker((str + i), ap, str);
-			/*if (str[i] >= '0' && str[i] <= '9')
-			{
-				check_num(str + i);
-				i++;
-			}
-			if (str[i] == '%')
-			{
-				ft_putchar('%');
-				i++;
-			}
-			if (str[i] == 's')
-			{
-				i += 1;
-				format += conv_s(str, ap);
-			}
-			if (str[i] == 'c')
-			{
-				i += 1;
-				conv_c(str, ap);
-				format++;
-			}
-			s[j] = str[i];
-		}*/
+			format += checker((str + i), ap, str);
+			i++;
 		}
 		s[j] = str[i];
 		ft_putchar(s[j]);

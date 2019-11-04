@@ -1,26 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 14:34:55 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/27 14:34:59 by ktbatou          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "ft_printf.h"
 
-#include <stdio.h>
-#include <stdarg.h>
-
-void	test(int a, ...)
+struct data
 {
-	va_list ap;
-	int b;
-	
-	va_start(ap, a);
-	while ((b = va_arg(ap, int)))
- 		printf ("%d\n", b);
-	va_end(ap);
-}
+	char flags[10];
+	void *t;
+};
 
+const struct data g_struct =
+{
+	{1234},
+	{&conv_c}
+};
+
+data = g_struct;

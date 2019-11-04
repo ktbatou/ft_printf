@@ -3,13 +3,13 @@
 void    test(int a, ...);
 int	main()
 {
-	char str[10] = "ktbatou";
+	char str[100] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	int a;
 
-	a = ft_printf("Im %s i've played for %c times", str, 57);
+	a = ft_printf("Im %5s i've played for %c times", str, 57);
 
-/*	printf("%d\n", a);
-	printf("|%5s|\n", "Kao");
+	printf("%d\n", a);
+/*	printf("|%5s|\n", "Kao");
 	printf("|%.2s|\n", "Kao");
 	printf("|%5s|\n", "Kao");
 	printf("|%.0s|\n", "Kao");

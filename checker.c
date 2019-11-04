@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 15:13:26 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/03 18:40:30 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/04 12:26:27 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,26 @@ int  checker(char *str, va_list ap, char *s )
 	
 	format = 0;
 	
-	//printf(" ========> %c\n",str);
-	/*if (*str >= '0' && *str <= '9')
+//	printf(" ========> %c\n",*str);
+	if (*str >= '0' && *str <= '9')
 	{
-		check_num(*str);
-		*str++;
+		check_num(str);
+		str++;
 	}
 	if (*str == '%')
 	{
 		ft_putchar('%');
-		*str++;
+		str++;
 	}
 	if (*str == 's')
+	{
 		format += conv_s(s, ap);
-		*str++;
+		str++;
 	}
 	if (*str == 'c')
 	{
 		conv_c(s, ap);
 		format++;
-	}*/
+	}
 	return (format);
 }
