@@ -3,12 +3,14 @@
 void    test(int a, ...);
 int	main()
 {
-	char str[100] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	char str[100] = "kaoutar";
 	int a;
+	int i = 0;
 
-	a = ft_printf("Im %5s i've played for %c times", str, 57);
-
-	printf("%d\n", a);
+	a = ft_printf("Im % 9s i've % played for %555c times", str, 'G');
+	i =    printf("\nIm %9s i've %  played for %c times\n", str, 'G');
+//	printf("%d\n", a);
+//	printf("%d\n", i);
 /*	printf("|%5s|\n", "Kao");
 	printf("|%.2s|\n", "Kao");
 	printf("|%5s|\n", "Kao");

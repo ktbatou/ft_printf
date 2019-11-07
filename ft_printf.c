@@ -5,39 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 14:51:28 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/04 15:11:29 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/11/05 10:11:03 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/07 18:53:09 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+const t_data g_struct =
+{
+	{"cs"},
+	{&conv_c, &conv_s}
+};
+
 int		ft_printf(char *str, ...)
 {
-	int i;
-	int j;
-	int format;
-	char *s;
+	int		i;
+	int		format;
+	char	*s;
+	va_list	ap;
 
 	i = 0;
-	j = 0;
 	format = 0;
-	va_list ap;
-	va_start (ap, str);
-	s = ft_strnew(ft_strlen(str) + 1);
+	va_start(ap, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			i++;
-			format += checker((str + i), ap, str);
-			i++;
+			format = ft_check(str, i, ap);
+			i += (format - i) + 1;
 		}
-		s[j] = str[i];
-		ft_putchar(s[j]);
+		ft_putchar(str[i]);
 		i++;
-		j++;
-		format++;
 	}
 	va_end(ap);
-	return (format);	
+	return (format);
+}
+
+int		ft_check(char *str, int n, va_list op)
+{
+	t_valeur	v;
+	t_data		data;
+
+	v.f = 0;
+	v.a = 0;
+	v.i = n;
+	data = g_struct;
+	while (str[n])
+	{
+		v.j = 0;
+		while (v.j < 3)
+		{
+			if (data.flags[v.j] == str[n])
+			{
+				v.f += data.flag[v.j](str, op, v.i);
+				v.a = 1;
+				break ;
+			}
+			v.j++;
+		}
+		if (v.a == 1)
+			break ;
+		n++;
+	}
+	return (n);
 }

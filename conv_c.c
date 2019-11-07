@@ -6,13 +6,17 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/10/31 14:13:28 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/07 18:42:28 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-void 	conv_c(char *s1, va_list s2)
+int	conv_c(char *s1, va_list s2, int n)
 {
-	ft_putchar(va_arg(s2, int));
-}
+	char s;
 
+	s = va_arg(s2, int);
+
+	ft_putchar(s);
+	return (1);
+}
