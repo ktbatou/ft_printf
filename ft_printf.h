@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/07 18:19:19 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/09 17:45:59 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_date
 
 typedef struct s_detail
 {
-	int num;
+	int minus;
 	int hash;
 	int point;
 	int space;
@@ -44,5 +44,5 @@ int		conv_s(char *s1, va_list s2, int n);
 int 	check_num(char *str);
 int		checker(char *str, va_list ap, char *s );
 int		get_detail(char *str, int *de);
-
-
+void    print_num(char *n, char *str, int minus);
+void    print_nb(char  *nb, char c, int minus);
