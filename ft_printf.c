@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:11:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/09 15:23:59 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/13 11:56:02 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 const t_data g_struct =
 {
-	{"cs"},
-	{&conv_c, &conv_s}
+	{"csx"},
+	{&conv_c, &conv_s, &conv_x}
 };
 
 int		ft_printf(char *str, ...)

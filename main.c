@@ -7,11 +7,12 @@ int	main()
 	int a;
 	int i = 0;
 
-	a = ft_printf("Im %0s i've  played for %5c times", str, 'G');
-	i = printf("\nIm %0s i've  played for %5c times\n", str, 'G');
-//	printf("%d\n", a);
-//	printf("%d\n", i);
-//	printf("|%5s|\n", "Kao");
+	a = ft_printf("Im %1x ", 54654);
+
+	i = printf("\nIm %o \n", 54654);
+//	printf("%x\n", 5);
+//	printf("%\n", i);
+//	printf("|%s|\n", "Kao");
 //	printf("|%.2s|\n", "Kaofuu");
 //	printf("|%5s|\n", "Kao");
 //	printf("|%.0s|\n", "Kao");

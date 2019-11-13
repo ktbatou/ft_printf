@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/09 17:45:59 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:42:28 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ typedef struct s_valeur
 	int a;
 }	t_valeur;
 
+
+int     flag_size(char *str, int n);
+void    get_details(char *s1 ,char *str, int i);
+void    print_x(char *s1, char *s2, int minus, int hash);
+int     conv_x(char *s1, va_list s2, int n);
 int		ft_check(char *str, int i, va_list op);
 int		percent(char *str, va_list s);
 int		ft_printf(char *str, ...);
