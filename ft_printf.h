@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/13 14:42:28 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/16 10:06:34 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 typedef struct s_date
 {
-	char flags[4];
-	int (*flag[4])(char *str, va_list s2, int n);
+	char flags[7];
+	int (*flag[7])(char *str, va_list s2, int n);
 } t_data;
 
 typedef struct s_detail
@@ -36,7 +36,10 @@ typedef struct s_valeur
 	int a;
 }	t_valeur;
 
-
+int     conv_d(char *str, va_list s2, int n);
+int     conv_xx(char *str, va_list s2, int n);
+void    print_p(char *s1, char *str, int minus);
+int     conv_p(char *str, va_list s2, int n);
 int     flag_size(char *str, int n);
 void    get_details(char *s1 ,char *str, int i);
 void    print_x(char *s1, char *s2, int minus, int hash);

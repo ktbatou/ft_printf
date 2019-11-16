@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_p.c                                           :+:      :+:    :+:   */
+/*   conv_x.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 14:06:36 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/13 16:30:38 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/14 17:45:02 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,26 @@ int	x_size(unsigned int nb)
 	return (i);
 }
 
-int		conv_x(char *s1, va_list s2, int n)
+int		conv_x(char *str, va_list s2, int n)
 {
 	unsigned int dec;
 	unsigned int i;
 	int count;
-	char *str;
+	char *s;
 
 	dec = va_arg(s2, unsigned int);
 	count = x_size(dec);
-	str = ft_strnew(count);
-	str[count--] = '\0';
+	s = ft_strnew(count);
+	s[count--] = '\0';
 	while (count >= 0)
 	{
 		if ((dec % 16) >= 10)
-		{
-			str[count--] = ((dec % 16) % 10) + 'a';
-			dec /= 16;
-		}
+			s[count--] = ((dec % 16) % 10) + 'a';
 		else
-		{
-		i = dec % 16;
-		str[count--] = '0' + i;
+			s[count--] = '0' + (dec % 16);
 		dec /= 16;
-		}
 	}
-	get_details(s1, str, n);
+	get_details(str, s, n);
 	return (0);
 }
 
