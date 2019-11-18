@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/14 17:45:02 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/18 11:27:42 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,15 @@ int		flag_size(char *str, int n)
 
 void	get_details(char *s1 ,char *str, int i)
 {
-	int			n;
+	t_valeur	v;
 	t_detail	detail;
-	char		*s;
 
-	n = 0;
+	v.j = 0;
+	v.flag = 0;
+	detail.zero = 0;
 	detail.minus = 0;
 	detail.hash = 0;
-	s = ft_strnew(flag_size(s1, i));
+	v.num = ft_strnew(flag_size(s1, i));
 	while (s1[i] != 'x')
 	{
 		if (s1[i] == '-')
@@ -77,13 +78,18 @@ void	get_details(char *s1 ,char *str, int i)
 		if (s1[i] == '#')
 			detail.hash = 1;
 		if (s1[i] >= 48 && s1[i] <= 57)
-			s[n++] = s1[i];
+		{
+			if (s1[i] == '0' && v.flag == 0)
+				detail.zero = 1;
+			v.flag = 1;
+			v.num[v.j++] = s1[i];
+		}
 		i++;
 	}
-	print_x(s, str, detail.minus, detail.hash);
+	print_x(v.num, str, detail.minus, detail.hash, detail.zero);
 }
 
-void	print_x(char *s1, char *s2, int minus, int hash)
+void	print_x(char *s1, char *s2, int minus, int hash, int zero)
 {
 	int	i;
 
@@ -96,7 +102,14 @@ void	print_x(char *s1, char *s2, int minus, int hash)
 	}
 	else
 		i = 0;
-	if (minus == 1)
+	if (zero == 1 && minus == 0 && hash == 1)
+	{
+		ft_putstr("0x");
+		 while (i-- > 0)
+			 ft_putchar('0');
+		 ft_putstr(s2);
+	}
+	else if (minus == 1)
 	{
 		if (hash == 1)
 			ft_putstr("0x");

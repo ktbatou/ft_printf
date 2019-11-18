@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/09 17:47:52 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/18 11:49:38 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -23,25 +23,23 @@ int	ft_size(char *str, int i)
 
 int	conv_c(char *s1, va_list s2, int n)
 {
-	int		i;
-	int		j;
-	char	*num;
+	t_valeur	v;
 	char	s;
 	t_detail detail;
 	
-	i = 0;
+	v.i = 0;
 	s = va_arg(s2, int);
 	detail.minus = 0;
-	num = ft_strnew(ft_size(s1, n));
+	v.num = ft_strnew(ft_size(s1, n));
 	while(s1[n] != 'c')
 	{
 		if (s1[n] == '-')
 			detail.minus = 1;
 		if (s1[n] >= 48 && s1[n] <= 57)
-			num[i++] = s1[n];
+			v.num[v.i++] = s1[n];
 		n++;
 	}
-	print_nb(num, s, detail.minus);
+	print_nb(v.num, s, detail.minus);
 	return (1);
 }
 

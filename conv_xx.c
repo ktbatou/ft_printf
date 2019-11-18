@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:45:33 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/15 16:13:48 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/18 11:48:28 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_X(char *str, char *s, int minus, int hash)
+void	print_X(char *str, char *s, int minus, int hash, int zero)
 {
 	int	i;
 
@@ -25,7 +25,14 @@ void	print_X(char *str, char *s, int minus, int hash)
 	}
 	else
 		i = 0;
-	if (minus == 1)
+	if (zero == 1 && minus == 0 && hash == 1)
+	{
+		ft_putstr("0X");
+		while (i-- > 0)
+			ft_putchar('0');
+		ft_putstr(str);
+	}
+	else if (minus == 1)
 	{
 		if (hash == 1)
 			ft_putstr("0X");
@@ -55,25 +62,31 @@ int		flag(char *str, int n)
 
 void	details(char *s, char *str, int i)
 { 
-	int		n;
-	char	*num;
+	t_valeur v;
 	t_detail detail;
 
 	detail.minus = 0;
 	detail.hash = 0;
-	n = 0;
-	num = ft_strnew(flag(str, i));
+	detail.zero = 0;
+	v.flag = 0;
+	v.j = 0;
+	v.num = ft_strnew(flag(str, i));
 	while (str[i] != 'X')
 	{
 		if (str[i]  >= '0' && str[i] <= '9')
-		 	num[n++] = str[i];
+		{
+			if (str[i] == '0' && v.flag == 0)
+				detail.zero = 1;
+			v.flag = 1;
+		 	v.num[v.j++] = str[i];
+		}
 		if (str[i] == '-')
 			detail.minus = 1;
 		if (str[i] == '#')
 			detail.hash = 1;
 		i++;
 	}
-	print_X(s, num, detail.minus, detail.hash);
+	print_X(s, v.num, detail.minus, detail.hash, detail.zero);
 }
 
 int		size(unsigned int nb)
