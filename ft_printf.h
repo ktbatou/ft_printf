@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/18 14:52:31 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/19 10:54:34 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_valeur
 }	t_valeur;
 
 
+char	*ft_utoa(unsigned int n);
+int     conv_u(char *str, va_list s2, int n);
 int     conv_i(char *str, va_list s2, int n);
 int     conv_d(char *str, va_list s2, int n);
 int     conv_xx(char *str, va_list s2, int n);

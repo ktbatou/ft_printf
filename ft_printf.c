@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:11:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/18 14:52:19 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/19 15:46:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 const t_data g_struct =
 {
-	{"csxpXdi"},
-	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx, &conv_d, &conv_i}
+	{"csxpXdiu"},
+	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx, &conv_d, &conv_i, &conv_u}
 
 };
 
@@ -55,7 +55,7 @@ int		ft_check(char *str, int n, va_list op)
 	while (str[n])
 	{
 		v.j = 0;
-		while (v.j < 7)
+		while (v.j < 8)
 		{
 			if (data.flags[v.j] == str[n])
 			{
