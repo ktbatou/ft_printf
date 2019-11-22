@@ -7,8 +7,8 @@ int	main()
 	int a;
 	int i = -156543;
 
-	a = ft_printf("|%-+5u| \n",i);
-	printf("\n|%+-125u| \n",i);
+	a = ft_printf("|%-#22o| \n",i);
+	//printf("\n|%o| \n",i);
 //	printf("%x\n", 5);
 //	printf("%\n", i);
 //	printf("|%s|\n", "Kao");
