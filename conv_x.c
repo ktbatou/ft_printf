@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/22 15:30:18 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/23 12:39:40 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	get_details(char *s1 ,char *str, int i)
 		}
 		i++;
 	}
-	print_x(v.num, str, detail.minus, detail.hash, detail.zero);
+	print_x(v.num, str, detail);
 }
 
-void	print_x(char *s1, char *s2, int minus, int hash, int zero)
+void	print_x(char *s1, char *s2, t_detail det)
 {
 	int	i;
 
@@ -97,21 +97,21 @@ void	print_x(char *s1, char *s2, int minus, int hash, int zero)
 	if (ft_strlen(s2) < i)
 	{
 		i -= ft_strlen(s2);
-		if (hash == 1)
+		if (det.hash == 1)
 			i -= 2;
 	}
 	else
 		i = 0;
-	if (zero == 1 && minus == 0 && hash == 1)
+	if (det.zero == 1 && det.minus == 0 && det.hash == 1)
 	{
 		ft_putstr("0x");
 		 while (i-- > 0)
 			 ft_putchar('0');
 		 ft_putstr(s2);
 	}
-	else if (minus == 1)
+	else if (det.minus == 1)
 	{
-		if (hash == 1)
+		if (det.hash == 1)
 			ft_putstr("0x");
 		ft_putstr(s2);
 		while (i-- > 0)
@@ -121,7 +121,7 @@ void	print_x(char *s1, char *s2, int minus, int hash, int zero)
 	{
 		while (i-- > 0)
 			ft_putchar(' ');
-		if (hash == 1)
+		if (det.hash == 1)
 			ft_putstr("0x");
 		ft_putstr(s2);
 	}

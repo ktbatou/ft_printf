@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:11:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/22 18:04:15 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/23 17:04:47 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 const t_data g_struct =
 {
-	{"csxpXdiuo"},
-	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx, &conv_d, &conv_i, &conv_u, &conv_o}
+	{"csxpXdiuo%"},
+	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx, &conv_d, &conv_i, &conv_u, &conv_o, &percent}
 
 };
 
@@ -33,10 +33,10 @@ int		ft_printf(char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			format = ft_check(str, i, ap);
+			format = ft_check(str, i + 1, ap);
 			i += (format - i) + 1;
 		}
-		if (str[i]  != '%')
+		if (str[i]  != '%' && str[i])
 		{
 			ft_putchar(str[i]);
 			i++;
@@ -58,7 +58,7 @@ int		ft_check(char *str, int n, va_list op)
 	while (str[n])
 	{
 		v.j = 0;
-		while (v.j < 9)
+		while (v.j < 10)
 		{
 			if (data.flags[v.j] == str[n])
 			{

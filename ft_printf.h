@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/22 18:04:04 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/23 14:41:32 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 typedef struct s_date
 {
-	char flags[9];
-	int (*flag[9])(char *str, va_list s2, int n);
+	char flags[10];
+	int (*flag[10])(char *str, va_list s2, int n);
 } t_data;
 
 typedef struct s_detail
@@ -40,6 +40,7 @@ typedef struct s_valeur
 }	t_valeur;
 
 
+int     percent(char *str, va_list  s2, int n);
 int     conv_o(char *str, va_list s2, int n);
 char	*ft_utoa(unsigned int n);
 int     conv_u(char *str, va_list s2, int n);
@@ -50,10 +51,9 @@ void    print_p(char *s1, char *str, int minus);
 int     conv_p(char *str, va_list s2, int n);
 int     flag_size(char *str, int n);
 void    get_details(char *s1 ,char *str, int i);
-void    print_x(char *s1, char *s2, int minus, int hash, int zero);
+void    print_x(char *s1, char *s2, t_detail det);
 int     conv_x(char *s1, va_list s2, int n);
 int		ft_check(char *str, int i, va_list op);
-int		percent(char *str, va_list s);
 int		ft_printf(char *str, ...);
 int		conv_c(char *s1, va_list s2, int n);
 int		conv_s(char *s1, va_list s2, int n);

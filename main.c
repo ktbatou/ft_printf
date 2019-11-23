@@ -5,10 +5,10 @@ int	main()
 {
 	char str[100] = "kaoutar";
 	int a;
-	int i = -156543;
+	int i = 2000;
 
-	a = ft_printf("|%-#22o| \n",i);
-	//printf("\n|%o| \n",i);
+	printf("hello, %s.", NULL);
+	//printf("%s", "3's a charm"i);
 //	printf("%x\n", 5);
 //	printf("%\n", i);
 //	printf("|%s|\n", "Kao");

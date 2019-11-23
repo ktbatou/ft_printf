@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_d.c                                           :+:      :+:    :+:   */
+/*   percent.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/23 13:05:49 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/11/23 13:48:41 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/11/23 14:48:22 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 
-void	print_d(char *num, int nb, t_detail d)
+#include "ft_printf.h"
+void	print_prc(char *num, t_detail d)
 {
-	int	i;
-	char	*str;
+	int		i;
 	char	c;
 
 	i = ft_atoi(num);
-	str = ft_itoa(nb);
 	c = ' ';
-	if (d.zero == 1 && d.minus == 0)
-		c = '0';
-	if (i > ft_strlen(str))
-		i -= ft_strlen(str);
+	if (i >= 1)
+		i--;
 	else
 		i = 0;
+	if (d.zero == 1 && d.minus == 0)
+		c = '0';
 	if (d.minus == 1)
 	{
-		if (d.plus == 1)
-		{
-			ft_putchar('+');
-			i--;
-		}
-		ft_putstr(str);
+		ft_putchar('%');
 		while (i-- > 0)
 			ft_putchar(c);
 	}
@@ -42,35 +35,36 @@ void	print_d(char *num, int nb, t_detail d)
 	{
 		while (i-- > 0)
 			ft_putchar(c);
-		ft_putstr(str);
+		ft_putchar('%');
 	}
 }
 
-int		string_size(char *str, int	n)
+int		count(char *str, int n)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
-	while (str[n++] != 'd')
-		i++;
+	while (str[n] != '%')
+	{
+		if (str[n] >= '0' && str[n] <= '9')
+			i++;
+		n++;
+	}
 	return (i);
 }
 
-void	d_detail(int num, char *str, int	n)
+void	detail_prc(char *str, int n)
 {
-	t_valeur	v;
-	t_detail	detail;
+	t_detail detail;
+	t_valeur v;
 
+	v.flag = 0;
 	v.j = 0;
 	detail.minus = 0;
-	detail.plus = 0;
 	detail.zero = 0;
-	v.flag = 0;
-	v.num = ft_strnew(string_size(str, n));
-	while (str[n] != 'd')
+	v.num = ft_strnew(count(str, n));
+	while (str[n] != '%')
 	{
-		if (str[n] == '+' && num >= 0)
-			detail.plus = 1;
 		if (str[n] == '-')
 			detail.minus = 1;
 		if (str[n] >= '0' && str[n] <= '9')
@@ -82,17 +76,11 @@ void	d_detail(int num, char *str, int	n)
 		}
 		n++;
 	}
-	print_d(v.num, num, detail);
+	print_prc(v.num, detail);
 }
 
-int		conv_d(char *str, va_list s2, int n)
+int		percent(char *str, va_list  s2, int n)
 {
-	int		  num;
-	int			i;
-	char		*s1;
-	
-	num = va_arg(s2, int);
-//	s1 = ft_itoa(num);
-	d_detail(num, str, n);
+	detail_prc(str, n);
 	return (0);
 }
