@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/23 13:05:49 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/24 18:43:53 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,44 @@ void	print_d(char *num, int nb, t_detail d)
 		i -= ft_strlen(str);
 	else
 		i = 0;
+	if (d.plus == 1)
+		i--;
 	if (d.minus == 1)
 	{
-		if (d.plus == 1)
+		if (d.space == 1)
 		{
-			ft_putchar('+');
+			ft_putchar(' ');
 			i--;
 		}
+		if (d.plus == 1)
+			ft_putchar('+');
 		ft_putstr(str);
 		while (i-- > 0)
 			ft_putchar(c);
 	}
-	else
+	else if (d.plus == 1 && d.zero == 1)
 	{
+		if (d.space == 1)
+		{
+			ft_putchar(' ');
+			i--;
+		}
+		ft_putchar('+');
 		while (i-- > 0)
 			ft_putchar(c);
+		ft_putstr(str);
+	}	
+	else
+	{
+		if (d.space == 1)
+		{
+			ft_putchar(' ');
+			i--;
+		}
+		while (i-- > 0)
+			 ft_putchar(c);
+		if (d.plus == 1)
+			ft_putchar('+');
 		ft_putstr(str);
 	}
 }
@@ -65,6 +88,7 @@ void	d_detail(int num, char *str, int	n)
 	detail.minus = 0;
 	detail.plus = 0;
 	detail.zero = 0;
+	detail.space = 0;
 	v.flag = 0;
 	v.num = ft_strnew(string_size(str, n));
 	while (str[n] != 'd')
@@ -73,6 +97,8 @@ void	d_detail(int num, char *str, int	n)
 			detail.plus = 1;
 		if (str[n] == '-')
 			detail.minus = 1;
+		if (str[n] == ' ' && num >= 0)
+			detail.space = 1;
 		if (str[n] >= '0' && str[n] <= '9')
 		{
 			if (str[n] == '0' && v.flag == 0)

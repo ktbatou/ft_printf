@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:19 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/09 17:34:33 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/24 18:17:23 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,27 @@ static int	ft_size(char *str, int i)
 
 int	conv_s(char *s1, va_list s2, int n)
 {
-	int			i;
-	int			j;
-	char		*str;
-	char		*num;
+	char	 	*str;
 	t_detail	detail;
+	t_valeur	v;
 
-	i = 0;
+
+	v.i = 0;
 	detail.minus = 0;
 	str = va_arg(s2, char*);
+	if (str == NULL)
+		str = "(null)";
 	ft_size(s1, n);
-	num = ft_strnew(ft_size(s1, n));
+	v.num = ft_strnew(ft_size(s1, n));
 	while (s1[n] != 's')
 	{
 		if (s1[n] == '-')
 			detail.minus = 1;
 		if (s1[n] >= 48 && s1[n] <= 57)
-			num[i++] = s1[n];
+			v.num[v.i++] = s1[n];
 		n++;
 	}
-	print_num(num, str, detail.minus);
+	print_num(v.num, str, detail.minus);
 	return (0);
 }
 

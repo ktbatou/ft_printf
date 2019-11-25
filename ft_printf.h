@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/23 14:41:32 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/24 18:16:50 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_detail
 	int point;
 	int plus;
 	int zero;
+	int space;
+
 } t_detail;
 
 typedef struct s_valeur
