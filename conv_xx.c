@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:45:33 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/18 11:48:28 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/25 15:19:10 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	print_X(char *str, char *s, int minus, int hash, int zero)
 {
 	int	i;
+	char	c;
 
 	i = atoi(s);
+	c = ' ';
 	if (ft_strlen(str) < i)
 	{
 		i -= ft_strlen(str);
@@ -25,6 +27,8 @@ void	print_X(char *str, char *s, int minus, int hash, int zero)
 	}
 	else
 		i = 0;
+	if (zero == 1 && minus == 0)
+		c = '0';
 	if (zero == 1 && minus == 0 && hash == 1)
 	{
 		ft_putstr("0X");
@@ -38,12 +42,12 @@ void	print_X(char *str, char *s, int minus, int hash, int zero)
 			ft_putstr("0X");
 		ft_putstr(str);
 		while (i-- > 0)
-			ft_putchar(' ');
+			ft_putchar(c);
 	}
 	else
 	{
 		while(i-- > 0)
-			ft_putchar(' ');
+			ft_putchar(c);
 		if (hash == 1)
 			ft_putstr("0X");
 		ft_putstr(str);
@@ -60,7 +64,7 @@ int		flag(char *str, int n)
 	return (i);
 }
 
-void	details(char *s, char *str, int i)
+void	details(char *s, char *str, int i, unsigned int j)
 { 
 	t_valeur v;
 	t_detail detail;
@@ -82,7 +86,7 @@ void	details(char *s, char *str, int i)
 		}
 		if (str[i] == '-')
 			detail.minus = 1;
-		if (str[i] == '#')
+		if (str[i] == '#' && j != 0)
 			detail.hash = 1;
 		i++;
 	}
@@ -94,6 +98,8 @@ int		size(unsigned int nb)
 	int i;
 
 	i = 0;
+	if (nb == 0)
+		return (1);
 	while (nb >= 1)
 	{
 		nb /= 16;
@@ -106,9 +112,11 @@ int		conv_xx(char *str, va_list s2, int n)
 {
 	int nb;
 	unsigned int i;
+	unsigned int j;
 	char	*s;
 
 	i = va_arg(s2, unsigned int);
+	j = i;
 	nb = size(i);
 	s = ft_strnew(nb);
 	s[nb--] = '\0';
@@ -120,6 +128,6 @@ int		conv_xx(char *str, va_list s2, int n)
 			s[nb--] = (i % 16) + '0';
 		i /= 16;
 	}
-	details(s, str, n);
+	details(s, str, n, j);
   	return (0);
 }

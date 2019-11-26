@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/19 15:47:37 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/25 11:26:14 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	print_u(char *num, char *str, int minus, int plus, int zero)
 	c = ' ';
 	if (i > ft_strlen(str))
 		i -= ft_strlen(str);
-	if (zero == 1 && minus == 0)
-		c = '0';
 	else
 		i = 0;
+	if (zero == 1 && minus == 0)
+		c = '0';
 	if (minus == 1)
 	{
 		ft_putstr(str);

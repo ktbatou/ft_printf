@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/14 16:50:23 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/25 15:23:50 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	print_p(char *s1, char *str, int minus)
 	i = atoi(s1);
 	if (i > ft_strlen(str))
 			i -= ft_strlen(str) + 2;
+	else
+		i = 0;
 	if (minus == 1)
 	{
 		ft_putstr("0x");

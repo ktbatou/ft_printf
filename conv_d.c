@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/24 18:43:53 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/25 11:15:38 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_d(char *num, int nb, t_detail d)
 		i--;
 	if (d.minus == 1)
 	{
-		if (d.space == 1)
+		if (d.space == 1 && d.plus == 0)
 		{
 			ft_putchar(' ');
 			i--;
@@ -44,11 +44,6 @@ void	print_d(char *num, int nb, t_detail d)
 	}
 	else if (d.plus == 1 && d.zero == 1)
 	{
-		if (d.space == 1)
-		{
-			ft_putchar(' ');
-			i--;
-		}
 		ft_putchar('+');
 		while (i-- > 0)
 			ft_putchar(c);
@@ -56,7 +51,7 @@ void	print_d(char *num, int nb, t_detail d)
 	}	
 	else
 	{
-		if (d.space == 1)
+		if (d.space == 1 && d.plus == 0)
 		{
 			ft_putchar(' ');
 			i--;

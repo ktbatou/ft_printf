@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/23 12:39:40 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/25 11:48:21 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int		conv_x(char *str, va_list s2, int n)
 {
 	unsigned int dec;
 	unsigned int i;
+	unsigned int j;
 	int count;
 	char *s;
 
 	dec = va_arg(s2, unsigned int);
+	j = dec;
 	count = x_size(dec);
 	s = ft_strnew(count);
 	s[count--] = '\0';
@@ -46,7 +48,7 @@ int		conv_x(char *str, va_list s2, int n)
 			s[count--] = '0' + (dec % 16);
 		dec /= 16;
 	}
-	get_details(str, s, n);
+	get_details(str, s, n, j);
 	return (0);
 }
 
@@ -55,12 +57,16 @@ int		flag_size(char *str, int n)
 	int i;
 
 	i = 0;
-	while (str[n++] != 'x')
-		i++;
+	while (str[n] != 'x')
+	{
+		if (str[n] >= 48 && str[n] <= 57)
+			i++;
+		n++;
+	}
 	return (i);
 }
 
-void	get_details(char *s1 ,char *str, int i)
+void	get_details(char *s1 ,char *str, int i, unsigned int nb)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -75,7 +81,7 @@ void	get_details(char *s1 ,char *str, int i)
 	{
 		if (s1[i] == '-')
 			detail.minus = 1;
-		if (s1[i] == '#')
+		if (s1[i] == '#' && nb != 0)
 			detail.hash = 1;
 		if (s1[i] >= 48 && s1[i] <= 57)
 		{
@@ -92,7 +98,9 @@ void	get_details(char *s1 ,char *str, int i)
 void	print_x(char *s1, char *s2, t_detail det)
 {
 	int	i;
+	char	c;
 
+	c = ' ';
 	i = atoi(s1);
 	if (ft_strlen(s2) < i)
 	{
@@ -102,6 +110,8 @@ void	print_x(char *s1, char *s2, t_detail det)
 	}
 	else
 		i = 0;
+	if (det.zero == 1 && det.minus == 0)
+		c = '0';
 	if (det.zero == 1 && det.minus == 0 && det.hash == 1)
 	{
 		ft_putstr("0x");
@@ -115,12 +125,12 @@ void	print_x(char *s1, char *s2, t_detail det)
 			ft_putstr("0x");
 		ft_putstr(s2);
 		while (i-- > 0)
-			ft_putchar(' ');
+			ft_putchar(c);
 	}
 	else
 	{
 		while (i-- > 0)
-			ft_putchar(' ');
+			ft_putchar(c);
 		if (det.hash == 1)
 			ft_putstr("0x");
 		ft_putstr(s2);

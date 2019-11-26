@@ -7,8 +7,9 @@ int	main()
 	int a;
 	int i = 2000;
 
-	ft_printf("this %- 012i numbers", 5);
-	printf("\nthis %- 012i numbers", 5);
+	ft_printf("this %03X numbers", 0);
+	printf("\nthis % 03X numbers", 0);
+	
 //	printf("%x\n", 5);
 //	printf("%\n", i);
 //	printf("|%s|\n", "Kao");
