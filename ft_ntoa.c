@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:52:34 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/27 16:18:47 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/27 16:17:03 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_count(unsigned int n)
+static long long int		ft_count(long long int n)
 {
 	int nb;
 
@@ -27,7 +27,7 @@ static int		ft_count(unsigned int n)
 	return (nb);
 }
 
-static char		*ft_nntoa(unsigned int nn, char *str, int nb, int i)
+static char		*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
 {
 	str[nb] = '\0';
 	while (nb > i)
@@ -38,24 +38,30 @@ static char		*ft_nntoa(unsigned int nn, char *str, int nb, int i)
 	return (str);
 }
 
-char			*ft_utoa(unsigned int n)
+char			*ft_ntoa(long long int n)
 {
-	unsigned int	nn;
-	int				i;
-	int				nb;
-	char			*str;
+	unsigned long long int	nn;
+	int						i;
+	long long int			nb;
+	char					*str;
 
 	i = 0;
 	nb = ft_count(n);
-	nn = n;
 	if (!(str = (char *)malloc(sizeof(char) * (nb + 1))))
 		return (NULL);
+	if (n < 0)
+	{
+		str[i++] = '-';
+		nn = n * -1;
+	}
+	else
+		nn = n;
 	if (nn <= 9)
 	{
 		str[i] = '0' + nn;
 		str[++i] = '\0';
 	}
 	if (nn > 9)
-		str = ft_nntoa(nn, str, nb, i);
+		str = ft_nbtoa(nn, str, nb, i);
 	return (str);
 }

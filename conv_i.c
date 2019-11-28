@@ -6,13 +6,30 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/24 18:50:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/27 18:41:48 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_i(char *num, int nb, t_detail d)
+char	*flag_conv(t_valeur v, t_detail d)
+{
+	char 	*str;
+
+	if (d.l == 1)
+		str = ft_ntoa(v.l);
+	else if (d.l == 2)
+		str = ft_ntoa(v.ll);
+	else if (d.h == 1)
+		str = ft_ntoa(v.h);
+	else if (d.h == 2)
+		str = ft_ntoa(v.hh);
+	else
+		str = ft_ntoa(v.i);
+	return (str);
+}
+
+void	print_i(char *num, t_valeur t, t_detail d, t_detail det)
 {
 	int		i;
 	char	c;
@@ -20,7 +37,7 @@ void	print_i(char *num, int nb, t_detail d)
 
 	i = ft_atoi(num);
 	c = ' ';
-	str = ft_itoa(nb);
+	str = flag_conv(t, det);
 	if (i > ft_strlen(str))
 		i -= ft_strlen(str);
 	else
@@ -80,7 +97,7 @@ int		i_size(char	*str, int n)
 	return (i);
 }
 
-void	i_detail(int nb, char *str, int n)
+void	i_detail(t_valeur val, t_detail d, char *str, int n)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -94,11 +111,11 @@ void	i_detail(int nb, char *str, int n)
 	v.num = ft_strnew(i_size(str, n));
 	while (str[n] != 'i')
 	{
-		if (str[n] == '+' && nb >= 0)
+		if (str[n] == '+' && val.j == 1)
 			detail.plus = 1;
 		if (str[n] == '-')
 			detail.minus = 1;
-		if (str[n] == ' ' && nb >= 0)
+		if (str[n] == ' ' && val.j == 1)
 			detail.space = 1;
 		if (str[n] >= '0' && str[n] <= '9')
 		{
@@ -109,16 +126,58 @@ void	i_detail(int nb, char *str, int n)
 		}
 		n++;
 	}
-	print_i(v.num, nb, detail);
+	print_i(v.num, val, detail, d);
+}
+
+t_detail	type_flag(char *str, int n)
+{
+	t_detail detail;
+
+	detail.l = 0;
+	detail.h = 0;
+	while(str[n] != 'i')
+	{
+		if (str[n] == 'l')
+			detail.l++;
+		if (str[n] == 'h')
+			detail.h++;
+		n++;
+	}
+	return (detail);
 }
 
 int		conv_i(char	*str, va_list s2, int n)
 {
-	int		nb;
-	char	*num;
+	t_detail det;
+	t_valeur v;
 
-	nb = va_arg(s2, int);
-//	num = ft_itoa(nb);
-	i_detail(nb, str, n);
+	det = type_flag(str, n);
+	v.j = 0;
+	if (det.l == 1)
+	{
+		if ((v.l = va_arg(s2, long int)) >= 0)
+			v.j = 1;
+	}
+	else if (det.l == 2)
+	{
+		if ((v.ll = va_arg(s2, long long int)) >= 0)
+			v.j = 1;
+	}
+	else if (det.h == 1)
+	{
+		if ((v.h = (short int)va_arg(s2, int)) >= 0)
+			v.j = 1;
+	}
+	else if (det.h == 2)
+	{
+		if ((v.hh = (signed char)va_arg(s2, int)) >= 0)
+			v.j = 1;
+	}
+	else
+	{
+		if ((v.i = va_arg(s2, int)) >= 0)
+			v.j = 1;
+	}
+	i_detail(v, det, str, n);
 	return (0);
 }

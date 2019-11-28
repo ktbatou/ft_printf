@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/25 11:48:29 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/11/27 16:17:15 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ typedef struct s_date
 typedef struct s_detail
 {
 	int minus;
-	int hash;
-	int point;
-	int plus;
+	int hash ;
+	int point ;
+	int plus ;
 	int zero;
 	int space;
+	int l;
+	int h;
 
 } t_detail;
 
@@ -39,9 +41,14 @@ typedef struct s_valeur
 	int 	a;
 	int 	flag;
 	char	*num;
+	long int l;
+	long long int ll;
+	short int h;
+	signed char hh;
 }	t_valeur;
 
 
+char            *ft_ntoa(long long int n);
 int     percent(char *str, va_list  s2, int n);
 int     conv_o(char *str, va_list s2, int n);
 char	*ft_utoa(unsigned int n);
