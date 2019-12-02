@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/22 18:08:44 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:34:32 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_o(char *str ,char *num, int minus, int hash, int zero)
+void	print_o(char *str ,char *num, t_detail d)
 {
 	int		i;
 	char	c;
@@ -23,13 +23,13 @@ void	print_o(char *str ,char *num, int minus, int hash, int zero)
 		i -= ft_strlen(str);
 	else
 		i = 0;
-	if (hash == 1)
+	if (d.hash == 1)
 		i--;
-	if (zero == 1 && minus == 0)
+	if (d.zero == 1 && d.minus == 0)
 		c  ='0';
-	if (minus == 1)
+	if (d.minus == 1)
 	{
-		if (hash == 1)
+		if (d.hash == 1)
 			ft_putchar('0');
 		ft_putstr(str);
 		while (i-- > 0)
@@ -39,7 +39,7 @@ void	print_o(char *str ,char *num, int minus, int hash, int zero)
 	{
 		while (i-- > 0)
 			ft_putchar(c);
-		if (hash == 1)
+		if (d.hash == 1)
 			ft_putchar('0');
 		ft_putstr(str);
 	}
@@ -59,7 +59,7 @@ int		num_size(char *str, int n)
 	return(i);
 }
 
-void	detail_o(char *nb, char *str, int n)
+void	detail_o(char *nb, char *str, int n, t_unsigned_v vl)
 {
 	t_detail detail;
 	t_valeur v;
@@ -74,7 +74,7 @@ void	detail_o(char *nb, char *str, int n)
 	{
 		if (str[n] == '-')
 			detail.minus = 1;
-		if (str[n] == '#')
+		if (str[n] == '#' && vl.signe == 1)
 			detail.hash = 1;
 		if (str[n]  >= '0' && str[n] <= '9')
 		{
@@ -85,40 +85,64 @@ void	detail_o(char *nb, char *str, int n)
 		}
 		n++;
 	}
-		print_o(nb, v.num, detail.minus, detail.hash, detail.zero);
+	print_o(nb, v.num, detail);
 }
 
-int		size_o(unsigned int n)
+t_detail 	flag_det(char *str, int n)
 {
-	int i;
+	t_detail det;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	while (n >= 1)
+	det.l = 0;
+	det.h = 0;
+	while (str[n] != 'o')
 	{
-		 n /= 8;
-		 i++;
+		if (str[n] == 'l')
+			det.l++;
+		if (str[n] == 'h')
+			det.h++;
+		n++;
 	}
-	return (i);
+	return(det);
 }
 
 int		conv_o(char	*str, va_list s2, int n)
 {
-	unsigned int	i;
-	int				j;
-	char			*num;
+	char	*num;
+	t_detail det;
+	t_unsigned_v v;
 
-	i = va_arg(s2, unsigned int);
-	j = size_o(i);
-	num = ft_strnew(j);
-	num[j--] = '\0';
-	while (j >= 0)
+	det = flag_det(str, n);
+	v.signe = 0;
+	if (det.l == 1)
 	{
-		num[j--] = '0' + (i % 8);
-		i /= 8;
+		if ((v.l = va_arg(s2, unsigned long int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.l, 8, 0);
 	}
-	//ft_putstr(num);
-	detail_o(num, str, n);
+	else if (det.l == 2)
+	{
+		if ((v.ll = va_arg(s2, unsigned long long int)) != 0)
+		   v.signe = 1;	
+		num = ft_itoa_base(v.ll, 8, 0);
+	}
+	else if (det.h == 1)
+	{
+		if ((v.h = (unsigned short int)va_arg(s2, unsigned int)) != 0)
+			 v.signe = 1;
+		num = ft_itoa_base(v.h, 8, 0);
+	}
+	else if (det.h == 2)
+	{
+		if ((v.hh = (unsigned char)va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.hh, 8, 0);
+	}
+	else
+	{
+		if ((v.i = va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.i, 8, 0);
+	}
+	detail_o(num, str, n, v);
 	return (0);
 }	

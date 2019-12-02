@@ -6,49 +6,68 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/25 11:48:21 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:33:33 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	x_size(unsigned int nb)
+t_detail 	x_flag(char *str, int n)
 {
-	int	i;
+	t_detail det;
 
-	i = 0;
-	if (nb == 0)
-		return (1);
-	while (nb >= 1)
+	det.l = 0;
+	det.h = 0;
+	while (str[n] != 'x')
 	{
-		nb /= 16;
-		i++;
+		if (str[n] == 'l')
+			det.l++;
+		if (str[n] == 'h')
+			det.h++;
+		n++;
 	}
-	return (i);
+	return(det);
 }
 
 int		conv_x(char *str, va_list s2, int n)
 {
-	unsigned int dec;
-	unsigned int i;
-	unsigned int j;
-	int count;
-	char *s;
+	char *num;
+	t_detail d;
+	t_unsigned_v v;
 
-	dec = va_arg(s2, unsigned int);
-	j = dec;
-	count = x_size(dec);
-	s = ft_strnew(count);
-	s[count--] = '\0';
-	while (count >= 0)
+	d = x_flag(str, n);
+	v.signe = 0;
+	if (d.l == 1)
 	{
-		if ((dec % 16) >= 10)
-			s[count--] = ((dec % 16) % 10) + 'a';
-		else
-			s[count--] = '0' + (dec % 16);
-		dec /= 16;
+		if ((v.l = va_arg(s2, unsigned long int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.l, 16, 0);
 	}
-	get_details(str, s, n, j);
+	else if (d.l == 2)
+	{
+		if ((v.ll = va_arg(s2, unsigned long long int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.ll, 16, 0);
+	}
+	else if (d.h == 1)
+	{
+		if ((v.h = (unsigned short int)va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.h, 16, 0);
+	}
+	else if (d.h == 2)
+	{
+		if ((v.hh = (unsigned char)va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.hh, 16, 0);
+	}
+	else
+	{
+		if ((v.i = va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.i, 16, 0);
+	}
+	get_details(str, num, n, v);
 	return (0);
 }
 
@@ -66,7 +85,7 @@ int		flag_size(char *str, int n)
 	return (i);
 }
 
-void	get_details(char *s1 ,char *str, int i, unsigned int nb)
+void	get_details(char *s1 ,char *str, int i, t_unsigned_v vl)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -81,7 +100,7 @@ void	get_details(char *s1 ,char *str, int i, unsigned int nb)
 	{
 		if (s1[i] == '-')
 			detail.minus = 1;
-		if (s1[i] == '#' && nb != 0)
+		if (s1[i] == '#' && vl.signe == 1)
 			detail.hash = 1;
 		if (s1[i] >= 48 && s1[i] <= 57)
 		{
@@ -115,9 +134,9 @@ void	print_x(char *s1, char *s2, t_detail det)
 	if (det.zero == 1 && det.minus == 0 && det.hash == 1)
 	{
 		ft_putstr("0x");
-		 while (i-- > 0)
-			 ft_putchar('0');
-		 ft_putstr(s2);
+		while (i-- > 0)
+			ft_putchar('0');
+		ft_putstr(s2);
 	}
 	else if (det.minus == 1)
 	{

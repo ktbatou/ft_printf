@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:45:33 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/25 15:19:10 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:52:17 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		flag(char *str, int n)
 	return (i);
 }
 
-void	details(char *s, char *str, int i, unsigned int j)
+void	details(char *s, char *str, int i, t_unsigned_v val)
 { 
 	t_valeur v;
 	t_detail detail;
@@ -82,52 +82,72 @@ void	details(char *s, char *str, int i, unsigned int j)
 			if (str[i] == '0' && v.flag == 0)
 				detail.zero = 1;
 			v.flag = 1;
-		 	v.num[v.j++] = str[i];
+			v.num[v.j++] = str[i];
 		}
 		if (str[i] == '-')
 			detail.minus = 1;
-		if (str[i] == '#' && j != 0)
+		if (str[i] == '#' && val.signe == 1)
 			detail.hash = 1;
 		i++;
 	}
 	print_X(s, v.num, detail.minus, detail.hash, detail.zero);
 }
 
-int		size(unsigned int nb)
+t_detail 	X_flag(char *str, int n)
 {
-	int i;
+	t_detail det;
 
-	i = 0;
-	if (nb == 0)
-		return (1);
-	while (nb >= 1)
+	det.l = 0;
+	det.h = 0;
+	while (str[n] != 'X')
 	{
-		nb /= 16;
-		i++;
+		if (str[n] == 'l')
+			det.l++;
+		if (str[n] == 'h')
+			det.h++;
+		n++;
 	}
-	return (i);
+	return(det);
 }
 
 int		conv_xx(char *str, va_list s2, int n)
 {
-	int nb;
-	unsigned int i;
-	unsigned int j;
-	char	*s;
+	char	*num;
+	t_detail d;
+	t_unsigned_v v;
 
-	i = va_arg(s2, unsigned int);
-	j = i;
-	nb = size(i);
-	s = ft_strnew(nb);
-	s[nb--] = '\0';
-	while(nb >= 0)
+	d = X_flag(str, n);
+	v.signe = 0;
+	if (d.l == 1)
 	{
-		if ((i % 16) >= 10)
-			s[nb--] = ((i % 16) % 10) + 'A';
-		else
-			s[nb--] = (i % 16) + '0';
-		i /= 16;
+		if ((v.l = va_arg(s2, unsigned long int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.l, 16, 1);
 	}
-	details(s, str, n, j);
-  	return (0);
+	else if (d.l == 2)
+	{
+		if ((v.ll = va_arg(s2, unsigned long long int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.ll, 16, 1);
+	}
+	else if (d.h == 1)
+	{
+		if ((v.h = (unsigned short int)va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.h, 16, 1);
+	}
+	else if (d.h == 2)
+	{
+		if ((v.hh = (unsigned char)va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.hh, 16, 1);
+	}
+	else
+	{
+		if ((v.i = va_arg(s2, unsigned int)) != 0)
+			v.signe = 1;
+		num = ft_itoa_base(v.i, 16, 1);
+	}
+	details(num, str, n, v);
+	return (0);
 }

@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-
+#include <limits.h>
 void    test(int a, ...);
 int	main()
 {
@@ -7,8 +7,8 @@ int	main()
 	int a;
 	int i = 2000;
 
-	ft_printf("this %05 numbers");
-	printf("\nthis %05 numbers");
+	printf("\n%d\n", ft_printf("%x", 2233));
+	printf("%d\n", 	  printf("%#llo\n", 22337203685477ul));
 	
 //	printf("%x\n", 5);
 //	printf("%\n", i);

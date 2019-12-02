@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/27 16:17:15 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:32:50 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,21 @@ typedef struct s_valeur
 	signed char hh;
 }	t_valeur;
 
+typedef struct s_unsigned_v
+{
 
+	unsigned int i;
+	unsigned long int l;
+	unsigned long long ll;
+	unsigned short int h;
+	unsigned char hh;
+	int	signe;
+}	t_unsigned_v;
+
+
+ 
+char    *ft_itoa_base(unsigned long long int n, int base, int a);
+char            *ft_untoa(unsigned long long int n);
 char            *ft_ntoa(long long int n);
 int     percent(char *str, va_list  s2, int n);
 int     conv_o(char *str, va_list s2, int n);
@@ -59,7 +73,7 @@ int     conv_xx(char *str, va_list s2, int n);
 void    print_p(char *s1, char *str, int minus);
 int     conv_p(char *str, va_list s2, int n);
 int     flag_size(char *str, int n);
-void    get_details(char *s1 ,char *str, int i, unsigned int nb);
+void    get_details(char *s1 ,char *str, int i, t_unsigned_v  vl);
 void    print_x(char *s1, char *s2, t_detail det);
 int     conv_x(char *s1, va_list s2, int n);
 int		ft_check(char *str, int i, va_list op);
