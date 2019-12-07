@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/06 18:24:37 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/07 18:09:22 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ char	*type_conv(t_valeur v, t_detail det)
 
 void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 {
-	int		i;
-	int		j;
 	int		n;
 	char	*str;
 	char	c;
@@ -41,73 +39,25 @@ void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 	c = ' ';
 	n = ft_strlen(str);
 	if (v.num)
-		i = ft_atoi(v.num);
+		v.i = ft_atoi(v.num);
 	if (v.pre)
 	{
-		j = ft_atoi(v.pre);
-		if (j > n)
-			n = j;
-		if (j == 0)
+		v.j = ft_atoi(v.pre);
+		if (v.j > n)
+			n = v.j;
+		if (v.j == 0)
 			n = 0;
-		j -= ft_strlen(str);
+		v.j -= ft_strlen(str);
 	}
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
-	if (i > n)
-		i -= n;
+	if (v.i > n)
+		v.i -= n;
 	else
-		i = 0;
+		v.i = 0;
 	if (d.plus == 1)
-		i--;
-	if (d.minus == 1)
-	{
-		if (d.space == 1 && d.plus == 0)
-		{
-			ft_putchar(' ');
-			i--;
-		}
-		if (d.plus == 1)
-			ft_putchar('+');
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			 ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-		while (i-- > 0)
-			ft_putchar(c);
-	}
-	else if (d.plus == 1 && d.zero == 1 && d.point == 0)
-	{
-		ft_putchar('+');
-		while (i-- > 0)
-			ft_putchar(c);
-		ft_putstr(str);
-	}	
-	else
-	{
-		if (d.space == 1 && d.plus == 0)
-		{
-			ft_putchar(' ');
-			i--;
-		}
-		while (i-- > 0)
-			ft_putchar(c);
-		if (d.plus == 1)
-			ft_putchar('+');
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-	}
+		v.i--;
+	print_cond(d, v, str, c);
 }
 
 int		string_size(char *str, int	n)
@@ -119,32 +69,6 @@ int		string_size(char *str, int	n)
 	{
 		if (str[n] >= '0' && str[n] <= '9')
 			i++;
-		n++;
-	}
-	return (i);
-}
-
-int		pre_size(char *str, int n)
-{
-	int i;
-
-	i = 0;
-	while (str[n] >= '0' && str[n] <= '9')
-	{
-		i++;
-		n++;
-	}
-	return (i);
-}
-
-int		prec(char *str, int n, char **num)
-{
-	int i;
-
-	i = 0;
-	while (str[n] >= '0' && str[n] <= '9')
-	{
-		*num[i++] = str[n];
 		n++;
 	}
 	return (i);

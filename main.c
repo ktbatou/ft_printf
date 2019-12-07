@@ -7,7 +7,7 @@ int	main()
 	int a;
 	int i = 2000;
 
-	ft_printf("%.d",0);
+	ft_printf("%7.5d",3);
 //	printf("\n%9.3d\n", 99);
 //	printf("%x\n", 5);
 //	printf("%\n", i);

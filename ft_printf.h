@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/03 21:29:05 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/07 18:08:44 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ typedef struct s_unsigned_v
 	int	signe;
 }	t_unsigned_v;
 
-
+void    print_cond(t_detail d, t_valeur v, char *str, char c);
+void    zero_print(t_valeur v, char *str, char c);
+void    minus_print(t_detail d, t_valeur v, char *str, char c);
+void    normal_print(t_detail d, t_valeur v, char *str, char c);
+int     pre_size(char *str, int n);
+int     prec(char *str, int n, char **num);
 void    ft_nputstr(char const *s, int n); 
 char    *ft_itoa_base(unsigned long long int n, int base, int a);
 char            *ft_untoa(unsigned long long int n);
