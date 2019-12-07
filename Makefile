@@ -6,19 +6,19 @@
 #    By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
-#    Updated: 2019/11/07 09:50:45 by ktbatou          ###   ########.fr        #
+#    Updated: 2019/12/07 14:50:56 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  printf.a
-SRC = ft_printf.c conv_c.c conv_s.c main.c -l$(libft/libft.a)
-HDR = ft_printf.h
+NAME =  libftprintf.a
+SRC = conv_s.c conv_c.c ft_printf.c conv_p.c conv_x.c conv_xx.c  conv_i.c conv_u.c ft_utoa.c conv_o.c percent.c conv_d.c percent.c ft_ntoa.c ft_untoa.c ft_itoa_base.c ft_nputstr.c $(libft/libft.a)
+HDR = ./ft_printf.h
 
 all : $(NAME)
 
 $(NAME) :
-	gcc  -c $(SRC) -I $(HDR)
-	ar rc $(NAME) ft_printf.o conv_c.o conv_s.o main.o
+	gcc  -g -c $(SRC) #-I $(HDR)
+	ar rc $(NAME) *.o
 
 clean :
 		rm -f *.o

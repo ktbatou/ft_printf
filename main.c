@@ -7,9 +7,8 @@ int	main()
 	int a;
 	int i = 2000;
 
-	printf("\n%d\n", ft_printf("%x", 2233));
-	printf("%d\n", 	  printf("%#llo\n", 22337203685477ul));
-	
+	ft_printf("%.d",0);
+//	printf("\n%9.3d\n", 99);
 //	printf("%x\n", 5);
 //	printf("%\n", i);
 //	printf("|%s|\n", "Kao");

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/27 16:43:29 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/06 18:24:37 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,32 @@ char	*type_conv(t_valeur v, t_detail det)
 	return (str);
 }
 
-void	print_d(char *num, t_valeur vl, t_detail d, t_detail det)
+void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		n;
 	char	*str;
 	char	c;
 
-	i = ft_atoi(num);
 	str = type_conv(vl, det);
 	c = ' ';
-	if (d.zero == 1 && d.minus == 0)
+	n = ft_strlen(str);
+	if (v.num)
+		i = ft_atoi(v.num);
+	if (v.pre)
+	{
+		j = ft_atoi(v.pre);
+		if (j > n)
+			n = j;
+		if (j == 0)
+			n = 0;
+		j -= ft_strlen(str);
+	}
+	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
-	if (i > ft_strlen(str))
-		i -= ft_strlen(str);
+	if (i > n)
+		i -= n;
 	else
 		i = 0;
 	if (d.plus == 1)
@@ -55,11 +68,19 @@ void	print_d(char *num, t_valeur vl, t_detail d, t_detail det)
 		}
 		if (d.plus == 1)
 			ft_putchar('+');
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			 ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 		while (i-- > 0)
 			ft_putchar(c);
 	}
-	else if (d.plus == 1 && d.zero == 1)
+	else if (d.plus == 1 && d.zero == 1 && d.point == 0)
 	{
 		ft_putchar('+');
 		while (i-- > 0)
@@ -74,10 +95,18 @@ void	print_d(char *num, t_valeur vl, t_detail d, t_detail det)
 			i--;
 		}
 		while (i-- > 0)
-			 ft_putchar(c);
+			ft_putchar(c);
 		if (d.plus == 1)
 			ft_putchar('+');
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 	}
 }
 
@@ -95,6 +124,32 @@ int		string_size(char *str, int	n)
 	return (i);
 }
 
+int		pre_size(char *str, int n)
+{
+	int i;
+
+	i = 0;
+	while (str[n] >= '0' && str[n] <= '9')
+	{
+		i++;
+		n++;
+	}
+	return (i);
+}
+
+int		prec(char *str, int n, char **num)
+{
+	int i;
+
+	i = 0;
+	while (str[n] >= '0' && str[n] <= '9')
+	{
+		*num[i++] = str[n];
+		n++;
+	}
+	return (i);
+}
+
 void	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 {
 	t_valeur	v;
@@ -104,9 +159,12 @@ void	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 	detail.plus = 0;
 	detail.minus = 0;
 	detail.zero = 0;
+	detail.point = 0;
 	v.j = 0;
 	v.flag = 0;
-	v.num = ft_strnew(string_size(str, n));
+	v.pre = 0;
+	v.num = 0;
+	v.i = string_size(str, n);
 	while (str[n] != 'd')
 	{
 		if (str[n] == '+' && valeur.j == 1)
@@ -116,15 +174,23 @@ void	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 		if (str[n] == ' ' && valeur.j == 1)
 			detail.space = 1;
 		if (str[n] >= '0' && str[n] <= '9')
-		{
+		{	
+			if (!v.num)
+				v.num = ft_strnew(v.i);
 			if (str[n] == '0' && v.flag == 0)
 				detail.zero = 1;
 			v.flag = 1;
 			v.num[v.j++] = str[n];
 		}
+		if (str[n] == '.')
+		{
+			v.pre = ft_strnew(pre_size(str, n + 1));
+			n += prec(str, n + 1, &v.pre);
+			detail.point = 1;
+		}
 		n++;
 	}
-	print_d(v.num, valeur, detail, d);
+	print_d(v, valeur, detail, d);
 }
 
 t_detail	flag_detail(char *str, int n)

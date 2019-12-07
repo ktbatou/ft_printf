@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/02 16:32:50 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/03 21:29:05 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_valeur
 	int 	a;
 	int 	flag;
 	char	*num;
+	char	*pre;
 	long int l;
 	long long int ll;
 	short int h;
@@ -59,7 +60,7 @@ typedef struct s_unsigned_v
 }	t_unsigned_v;
 
 
- 
+void    ft_nputstr(char const *s, int n); 
 char    *ft_itoa_base(unsigned long long int n, int base, int a);
 char            *ft_untoa(unsigned long long int n);
 char            *ft_ntoa(long long int n);
@@ -83,5 +84,5 @@ int		conv_s(char *s1, va_list s2, int n);
 int 	check_num(char *str);
 int		checker(char *str, va_list ap, char *s );
 int		get_detail(char *str, int *de);
-void    print_num(char *n, char *str, int minus);
+void    print_num(char *n, char *pre, char *str, t_detail d);
 void    print_nb(char  *nb, char c, int minus);
