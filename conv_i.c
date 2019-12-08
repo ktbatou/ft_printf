@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/27 18:41:48 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/08 18:24:21 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,64 +29,50 @@ char	*flag_conv(t_valeur v, t_detail d)
 	return (str);
 }
 
-void	print_i(char *num, t_valeur t, t_detail d, t_detail det)
+void	print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 {
-	int		i;
+	int		n;
 	char	c;
 	char	*str;
 
-	i = ft_atoi(num);
 	c = ' ';
 	str = flag_conv(t, det);
-	if (i > ft_strlen(str))
-		i -= ft_strlen(str);
+	n = ft_strlen(str);
+	v.n = n;
+	if (v.num)
+		v.i = ft_atoi(v.num);
+	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
+		v.n--;
+	if (v.num)
+		v.i = ft_atoi(v.num);
+	if (v.pre)
+	{
+		v.j = ft_atoi(v.pre);
+		if (v.j > n)
+		{
+			n = v.j;
+			if (t.j == 0)
+				n++;
+		}
+		if (v.j == 0)
+			n = 0;
+		v.j -= v.n;
+	}
+	if (v.i > n)
+		v.i -= n;
 	else
-		i = 0;
-	if (d.space == 1 && i == 0 && d.minus == 0)
-		i++;
-	if (d.plus  == 1)
-		i--;
-	if (d.minus == 0 && d.zero == 1)
+		v.i = 0;
+	if (d.minus == 0 && d.zero == 1 && d.point == 0)
 		c = '0';
-	if (d.minus == 1)
-	{
-		if (d.space == 1 && d.plus == 0)
-		{
-			ft_putchar(' ');
-			i--;
-		}
-		if (d.plus == 1) 
-			ft_putchar('+'); 
-		ft_putstr(str);
-		while (i-- > 0)
-			ft_putchar(c);
-	}
-	else if (d.plus == 1 && d.zero == 1)
-	{
-		ft_putchar ('+');
-		while (i-- > 0)
-			ft_putchar(c);
-		ft_putstr(str);
-	}
-	else
-	{
-		if (d.space == 1 && d.plus == 0)
-		{
-			ft_putchar(' ');
-			i--;
-		}
-		while (i-- > 0)
-			ft_putchar(c);
-		if (d.plus == 1)
-			ft_putchar ('+');
-		ft_putstr(str);
-	}
+	if (d.plus == 1)
+		v.i--;
+	print_cond(d, v, t, str, c);
 }
 
 int		i_size(char	*str, int n)
 {
 	int i;
-	
+
 	i = 0;
 	while (str[n] != 'i')
 	{
@@ -124,9 +110,15 @@ void	i_detail(t_valeur val, t_detail d, char *str, int n)
 			v.flag = 1;
 			v.num[v.i++] = str[n];
 		}
+		if (str[n] == '.')
+		{
+			v.pre = ft_strnew(pre_size(str, n + 1));
+			n += prec(str, n + 1, v);
+			detail.point = 1;
+		}
 		n++;
 	}
-	print_i(v.num, val, detail, d);
+	print_i(v, val, detail, d);
 }
 
 t_detail	type_flag(char *str, int n)

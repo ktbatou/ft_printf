@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/07 18:09:22 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/08 18:43:21 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*type_conv(t_valeur v, t_detail det)
 	return (str);
 }
 
-void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
+int	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 {
 	int		n;
 	char	*str;
@@ -37,17 +37,27 @@ void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 
 	str = type_conv(vl, det);
 	c = ' ';
+	v.i = 0;
 	n = ft_strlen(str);
+	v.n = n;
+	if (v.num)
+		v.i = ft_atoi(v.num);
+	if ((vl.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
+		v.n--;
 	if (v.num)
 		v.i = ft_atoi(v.num);
 	if (v.pre)
 	{
 		v.j = ft_atoi(v.pre);
 		if (v.j > n)
+		{
 			n = v.j;
+			if (vl.j == 0)
+				n++;
+		}
 		if (v.j == 0)
 			n = 0;
-		v.j -= ft_strlen(str);
+		v.j -= v.n;
 	}
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
@@ -57,7 +67,8 @@ void	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 		v.i = 0;
 	if (d.plus == 1)
 		v.i--;
-	print_cond(d, v, str, c);
+	print_cond(d, v, vl, str, c);
+	return (v.i + n);
 }
 
 int		string_size(char *str, int	n)
@@ -74,7 +85,7 @@ int		string_size(char *str, int	n)
 	return (i);
 }
 
-void	d_detail(t_valeur valeur, char *str, int n, t_detail d)
+int	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -109,12 +120,12 @@ void	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 		if (str[n] == '.')
 		{
 			v.pre = ft_strnew(pre_size(str, n + 1));
-			n += prec(str, n + 1, &v.pre);
+			n += prec(str, n + 1, v);
 			detail.point = 1;
 		}
 		n++;
 	}
-	print_d(v, valeur, detail, d);
+	return (print_d(v, valeur, detail, d));
 }
 
 t_detail	flag_detail(char *str, int n)
@@ -172,6 +183,5 @@ int		conv_d(char *str, va_list s2, int n)
 		if ((vlr.i = va_arg(s2, int)) >= 0)
 			vlr.j = 1;
 	}
-	d_detail(vlr, str, n, detail);
-	return (0);
+	return (d_detail(vlr, str, n, detail));
 }
