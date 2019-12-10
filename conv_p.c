@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/02 17:07:45 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/10 13:27:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,72 @@ void	get_det(char *s1, char *str, int i)
 {
 	int			n;
 	t_detail	detail;
-	char		*s;
+	t_valeur	v;
 
 	n = 0;
 	detail.minus = 0;
-	s = ft_strnew(f_size(s1, i));
+	v.num = 0;
+	v.pre = 0;
 	while (s1[i] != 'p')
 	{
 		if (s1[i] == '-')
 			detail.minus = 1;
-		if (s1[i] >= 48 && s[i] <= 57)
-			s[n++] = s1[i];
+		if (s1[i] >= 48 && s1[i] <= 57)
+		{
+			if (!v.num)
+				v.num = ft_strnew(f_size(s1, i));
+			v.num[n++] = s1[i];
+		}
+		if  (s1[i] == '.')
+		{
+			v.pre = ft_strnew(pre_size(s1, i + 1));
+			n += prec(s1, i + 1, v);
+			detail.point =  1;
+		}
 		i++;
 	}
-	print_p(s, str, detail.minus);
+	print_p(v, str, detail);
 }
 
-void	print_p(char *s1, char *str, int minus)
+void	print_p(t_valeur v, char *str, t_detail d)
 {
 	int		i;
+	int		j;
+	int		n;
 
-	i = atoi(s1);
-	if (i > ft_strlen(str))
-			i -= ft_strlen(str) + 2;
+	j = 0;
+	i = 0;
+	n = ft_strlen(str) + 2;
+	if (d.point == 1 && ft_atoi(v.pre) > ft_strlen(str))
+		n -= 2;
+	v.n = n;
+	if (v.num)
+		i = ft_atoi(v.num);
+	if (v.pre)
+	{
+		j = ft_atoi(v.pre);
+		if (j > n)
+			n = j;
+		if (j == 0)
+			n = 0;
+		j -= v.n;
+	}
+	if (i > n)
+		i -= n;
 	else
 		i = 0;
-	if (minus == 1)
+	if (d.minus == 1)
 	{
 		ft_putstr("0x");
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 		while (i-- > 0)
 			ft_putchar(' ');
 	}
@@ -63,7 +100,15 @@ void	print_p(char *s1, char *str, int minus)
 		while (i-- > 0)
 			ft_putchar(' ');
 		ft_putstr("0x");
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 	}
 }
 

@@ -5,11 +5,11 @@ int	main()
 {
 	char str[100] = "kaoutar";
 	int a;
-	int i = 2000;
+	int i = 2;
 
-	printf("%");
+	ft_printf("%2.9p", 1234);
 //	printf ("\n%d ", printf("%.d", 55));
-//	printf("\n% 07i",-54);
+//	printf("\n%20p", &i);
 //	printf("\n%9.3d\n", 99);
 //	printf("%x\n", 5);
 //	printf("%\n", i);

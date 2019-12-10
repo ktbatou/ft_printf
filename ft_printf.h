@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/08 18:37:19 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/10 12:56:31 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int     conv_u(char *str, va_list s2, int n);
 int     conv_i(char *str, va_list s2, int n);
 int     conv_d(char *str, va_list s2, int n);
 int     conv_xx(char *str, va_list s2, int n);
-void    print_p(char *s1, char *str, int minus);
+void    print_p(t_valeur v, char *str, t_detail d);
 int     conv_p(char *str, va_list s2, int n);
 int     flag_size(char *str, int n);
 void    get_details(char *s1 ,char *str, int i, t_unsigned_v  vl);
