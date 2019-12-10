@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/08 18:24:21 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:22:43 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	str = flag_conv(t, det);
 	n = ft_strlen(str);
 	v.n = n;
+	v.i = 0;
+	v.j = 0;
 	if (v.num)
 		v.i = ft_atoi(v.num);
 	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
@@ -93,7 +95,9 @@ void	i_detail(t_valeur val, t_detail d, char *str, int n)
 	detail.plus = 0;
 	detail.zero = 0;
 	detail.space = 0;
+	detail.point = 0;
 	v.flag = 0;
+	v.pre = 0;
 	v.num = ft_strnew(i_size(str, n));
 	while (str[n] != 'i')
 	{

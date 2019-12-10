@@ -6,28 +6,50 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/28 16:07:14 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:41:45 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_u(char *str, char *num, t_detail d)
+void	print_u(char *str, t_valeur v, t_detail d)
 {
 	int		i;
+	int 	j;
 	char	c;
+	int 	n;
 
-	i = ft_atoi(num);
 	c = ' ';
-	if (i > ft_strlen(str))
-		i -= ft_strlen(str);
+	n = ft_strlen(str);
+	v.n = n;
+	if (v.num)
+		i = ft_atoi(v.num);
+	if (v.pre)
+	{
+		j = ft_atoi(v.pre);
+		if (j > n)
+			n = j;
+		if (j == 0)
+			n = 0;
+		j -= v.n;
+	}
+	if (i > n)
+		i -= n;
 	else
 		i = 0;
-	if (d.zero == 1 && d.minus == 0)
+	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if (d.minus == 1)
 	{
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 		while (i-- > 0)
 			ft_putchar(c);
 	}
@@ -35,7 +57,15 @@ void	print_u(char *str, char *num, t_detail d)
 	{
 		while (i-- > 0)
 			ft_putchar(c);
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 	}
 }
 
@@ -59,8 +89,8 @@ void	u_detail(char *num, char *str, int n)
 	t_valeur v;
 
 	detail.minus = 0;
-	detail.plus = 0;
 	detail.zero = 0;
+	detail.point = 0;
 	v.num = ft_strnew(u_size(str, n));
 	v.flag = 0;
 	v.i = 0;
@@ -75,9 +105,15 @@ void	u_detail(char *num, char *str, int n)
 			v.flag = 1;
 			v.num[v.i++] = str[n];
 		}
+		if  (str[n] == '.')
+		{
+			v.pre = ft_strnew(pre_size(str, n + 1));
+			n += prec(str, n + 1, v);
+			detail.point =  1;
+		}
 		n++;
 	}
-	print_u(num, v.num, detail);
+	print_u(num, v, detail);
 }
 
 t_detail 	flags(char *str, int n)

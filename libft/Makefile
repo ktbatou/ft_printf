@@ -6,7 +6,7 @@
 #    By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 11:38:26 by ktbatou           #+#    #+#              #
-#    Updated: 2019/11/01 12:25:55 by ktbatou          ###   ########.fr        #
+#    Updated: 2019/12/09 19:12:44 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADER = ./*.h
 all : $(NAME)
 
 $(NAME) :
-	gcc -Wextra -Werror -Wall -c $(SRC) -I $(HEADER)
+	gcc -g -Wextra -Werror -Wall -c $(SRC) -I $(HEADER)
 	ar rc $(NAME) ./*.o
 clean :
 	rm -f *.o

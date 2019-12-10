@@ -6,7 +6,7 @@
 #    By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
-#    Updated: 2019/12/07 17:40:54 by ktbatou          ###   ########.fr        #
+#    Updated: 2019/12/09 16:47:13 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ all : $(NAME)
 
 $(NAME) :
 	gcc  -g -c $(SRC) #-I $(HDR)
-	ar rc $(NAME) *.o
+	ar rc $(NAME) *.o libft/*.o
 
 clean :
 		rm -f *.o

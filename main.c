@@ -7,8 +7,8 @@ int	main()
 	int a;
 	int i = 2000;
 
-	printf ("\n%d ", ft_printf("%.37li", -22337203685477l));
-	printf ("\n%d ", printf("\n%.37li", -22337203685477l));
+	printf("%");
+//	printf ("\n%d ", printf("%.d", 55));
 //	printf("\n% 07i",-54);
 //	printf("\n%9.3d\n", 99);
 //	printf("%x\n", 5);
