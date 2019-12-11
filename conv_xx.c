@@ -6,41 +6,67 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:45:33 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/02 16:52:17 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:28:17 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_X(char *str, char *s, int minus, int hash, int zero)
+void	print_X(char *str, t_valeur v, t_detail d)
 {
 	int	i;
+	int n;
+	int j;
 	char	c;
 
-	i = atoi(s);
 	c = ' ';
-	if (ft_strlen(str) < i)
+	n = ft_strlen(str);
+	v.n = n;
+	i = 0;
+	j = 0;
+	v.j = 0;
+	if (v.num)
+		i = ft_atoi(v.num);
+	if (v.pre)
 	{
-		i -= ft_strlen(str);
-		if (hash == 1)
+		j = ft_atoi(v.pre);
+		v.j = j;
+		if (j > n)
+			n = j;
+		if (j == 0)
+			n = 0;
+		j -= v.n;
+	}
+	if (n < i)
+	{
+		i -= n;
+		if (d.hash == 1)
 			i -= 2;
 	}
 	else
 		i = 0;
-	if (zero == 1 && minus == 0)
+	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
-	if (zero == 1 && minus == 0 && hash == 1)
+	if (d.zero == 1 && d.minus == 0 && d.hash == 1 && d.point == 0)
 	{
 		ft_putstr("0X");
 		while (i-- > 0)
 			ft_putchar('0');
 		ft_putstr(str);
 	}
-	else if (minus == 1)
+	else if (d.minus == 1)
 	{
-		if (hash == 1)
+		if (d.hash == 1)
 			ft_putstr("0X");
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 		while (i-- > 0)
 			ft_putchar(c);
 	}
@@ -48,9 +74,17 @@ void	print_X(char *str, char *s, int minus, int hash, int zero)
 	{
 		while(i-- > 0)
 			ft_putchar(c);
-		if (hash == 1)
+		if (d.hash == 1)
 			ft_putstr("0X");
-		ft_putstr(str);
+		if (d.point == 1)
+		{
+			while (j-- > 0)
+				ft_putchar('0');
+		}
+		if (d.point == 1 && ft_atoi(v.pre) == 0)
+			ft_nputstr(str, 0);
+		else
+			ft_putstr(str);
 	}
 }
 
@@ -72,17 +106,27 @@ void	details(char *s, char *str, int i, t_unsigned_v val)
 	detail.minus = 0;
 	detail.hash = 0;
 	detail.zero = 0;
+	detail.point = 0;
 	v.flag = 0;
 	v.j = 0;
-	v.num = ft_strnew(flag(str, i));
+	v.num = 0;
+	v.pre = 0;
 	while (str[i] != 'X')
 	{
 		if (str[i]  >= '0' && str[i] <= '9')
 		{
+			if (!v.num)
+				v.num = ft_strnew(flag(str, i));
 			if (str[i] == '0' && v.flag == 0)
 				detail.zero = 1;
 			v.flag = 1;
 			v.num[v.j++] = str[i];
+		}
+		if (str[i] == '.')
+		{
+			v.pre = ft_strnew(pre_size(str, i + 1));
+			i += prec(str, i + 1, v);
+			detail.point = 1;
 		}
 		if (str[i] == '-')
 			detail.minus = 1;
@@ -90,7 +134,7 @@ void	details(char *s, char *str, int i, t_unsigned_v val)
 			detail.hash = 1;
 		i++;
 	}
-	print_X(s, v.num, detail.minus, detail.hash, detail.zero);
+	print_X(s, v, detail);
 }
 
 t_detail 	X_flag(char *str, int n)

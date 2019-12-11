@@ -7,7 +7,7 @@ int	main()
 	int a;
 	int i = 2;
 
-	ft_printf("%2.9p", 1234);
+	ft_printf("%8.5X", 34);
 //	printf ("\n%d ", printf("%.d", 55));
 //	printf("\n%20p", &i);
 //	printf("\n%9.3d\n", 99);
