@@ -5,9 +5,11 @@ int	main()
 {
 	char str[100] = "kaoutar";
 	int a;
-	int i = 2;
+	int i = 200;
 
-	ft_printf("%8.5X", 34);
+	//while (i-- >= 0)
+	ft_printf("%-5");
+
 //	printf ("\n%d ", printf("%.d", 55));
 //	printf("\n%20p", &i);
 //	printf("\n%9.3d\n", 99);

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/08 18:23:32 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 17:56:52 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	minus_print(t_detail d, t_valeur v, char *str, char c)
 		ft_putstr(str);
 	while (v.i-- > 0)
 		ft_putchar(c);
+	ft_strdel(&str);
 }
 
 void    normal_print(t_detail d, t_valeur v, char *str, char c)
@@ -54,6 +55,7 @@ void    normal_print(t_detail d, t_valeur v, char *str, char c)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
+	ft_strdel(&str);
 }
 
 void    zero_print(t_valeur v, char *str, char c)
@@ -62,6 +64,7 @@ void    zero_print(t_valeur v, char *str, char c)
 	while (v.i-- > 0)
 		ft_putchar(c);
 	ft_putstr(str);
+	ft_strdel(&str);
 }
 
 void	negative_print(t_detail d, t_valeur v, char *str, char c)
@@ -102,6 +105,7 @@ void	negative_print(t_detail d, t_valeur v, char *str, char c)
 		}
 		ft_putstr(str + 1);
 	}
+	ft_strdel(&str);
 }
 void	print_cond(t_detail d, t_valeur v,t_valeur vl, char *str, char c)
 {

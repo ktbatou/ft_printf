@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/18 11:49:38 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 16:25:11 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -60,4 +60,5 @@ void	print_nb(char *nb, char c, int minus)
 			ft_putchar(' ');
 		ft_putchar(c);
 	}
+	ft_strdel(&nb);
 }

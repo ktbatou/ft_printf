@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:19 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/04 16:37:07 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 16:27:07 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ void	print_num(char *n, char *pre, char *str, t_detail d)
 		else
 			ft_putstr(str);
 	}
+	ft_strdel(&n);
+	ft_strdel(&pre);
 }

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/10 13:27:30 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 19:52:39 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ void	print_p(t_valeur v, char *str, t_detail d)
 		else
 			ft_putstr(str);
 	}
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
+	ft_strdel(&str);
 }
 
 int		size_p(unsigned long long int nb)

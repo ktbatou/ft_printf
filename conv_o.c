@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/09 16:48:55 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 19:51:05 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_o(char *str , t_valeur v, t_detail d)
 
 		while (i-- > 0)
 			ft_putchar(c);
-		if ((d.hash == 1 && v.n > v.j) ||
+		if ((d.hash == 1 && v.n >= v.j) ||
 				(d.hash == 1 && v.j == 0)) 
 			ft_putchar('0');
 		if (d.point == 1)
@@ -80,6 +80,9 @@ void	print_o(char *str , t_valeur v, t_detail d)
 		else
 			ft_putstr(str);
 	}
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
+	ft_strdel(&str);
 }
 
 int		num_size(char *str, int n)

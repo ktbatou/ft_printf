@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/08 18:43:21 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 17:57:24 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 	v.i = 0;
 	n = ft_strlen(str);
 	v.n = n;
-	if (v.num)
-		v.i = ft_atoi(v.num);
 	if ((vl.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
 		v.n--;
 	if (v.num)
@@ -68,6 +66,8 @@ int	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 	if (d.plus == 1)
 		v.i--;
 	print_cond(d, v, vl, str, c);
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
 	return (v.i + n);
 }
 

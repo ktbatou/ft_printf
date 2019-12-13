@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/09 15:41:45 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 19:59:12 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	print_u(char *str, t_valeur v, t_detail d)
 		else
 			ft_putstr(str);
 	}
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
+	ft_strdel(&str);
 }
 
 int		u_size(char *str, int n)

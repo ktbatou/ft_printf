@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/09 19:22:43 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/12 19:49:14 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	if (d.plus == 1)
 		v.i--;
 	print_cond(d, v, t, str, c);
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
 }
 
 int		i_size(char	*str, int n)
