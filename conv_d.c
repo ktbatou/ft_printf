@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/16 13:17:46 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/17 17:50:41 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*type_conv(t_valeur v, t_detail det)
+char		*type_conv(t_valeur v, t_detail det)
 {
 	char	*str;
 
@@ -29,7 +29,7 @@ char	*type_conv(t_valeur v, t_detail det)
 	return (str);
 }
 
-int	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
+int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 {
 	int		n;
 	char	*str;
@@ -71,9 +71,9 @@ int	print_d(t_valeur v,  t_valeur vl, t_detail d, t_detail det)
 	return (v.i + n);
 }
 
-int		string_size(char *str, int	n)
+int			string_size(char *str, int n)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (str[n] != 'd')
@@ -85,7 +85,7 @@ int		string_size(char *str, int	n)
 	return (i);
 }
 
-int	d_detail(t_valeur valeur, char *str, int n, t_detail d)
+int			d_detail(t_valeur valeur, char *str, int n, t_detail d)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -105,11 +105,11 @@ int	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 		if (str[n] == '+' && valeur.j == 1)
 			detail.plus = 1;
 		if (str[n] == '-')
-			detail.minus =   1;
+			detail.minus = 1;
 		if (str[n] == ' ' && valeur.j == 1)
 			detail.space = 1;
 		if (str[n] >= '0' && str[n] <= '9')
-		{	
+		{
 			if (!v.num)
 				v.num = ft_strnew(v.i);
 			if (str[n] == '0' && v.flag == 0)
@@ -128,29 +128,11 @@ int	d_detail(t_valeur valeur, char *str, int n, t_detail d)
 	return (print_d(v, valeur, detail, d));
 }
 
-t_detail	flag_detail(char *str, int n)
-{
-	t_detail flag;
-
-	flag.l = 0;
-	flag.h = 0;
-
-	while (str[n] != 'd')
-	{
-		if (str[n] == 'l')
-			flag.l++;
-		if (str[n] == 'h')
-			flag.h++;
-		n++;
-	}
-	return (flag);
-}
-
-int		conv_d(char *str, va_list s2, int n)
+int			conv_d(char *str, va_list s2, int n)
 {
 	char		*s1;
 	t_detail	detail;
-	t_valeur 	vlr;
+	t_valeur	vlr;
 
 	detail.l = 0;
 	detail.h = 0;
@@ -158,30 +140,6 @@ int		conv_d(char *str, va_list s2, int n)
 	vlr.h = 0;
 	vlr.j = 0;
 	detail = flag_detail(str, n);
-	if (detail.l == 1)
-	{
-		if ((vlr.l = va_arg(s2, long int)) >= 0)
-			vlr.j = 1;
-	}
-	else if (detail.l == 2)
-	{
-		if ((vlr.ll = va_arg(s2, long long int)) >= 0)
-			vlr.j = 1;
-	}
-	else if (detail.h == 1)
-	{
-		if ((vlr.h = (short int)va_arg(s2, int)) >= 0)
-			vlr.j = 1;
-	}
-	else if (detail.h == 2)
-	{
-		if ((vlr.hh = (signed char)va_arg(s2, int)) >= 0)
-			vlr.j = 1;
-	}
-	else
-	{
-		if ((vlr.i = va_arg(s2, int)) >= 0)
-			vlr.j = 1;
-	}
+	types(s2, detail, &vlr);
 	return (d_detail(vlr, str, n, detail));
 }
