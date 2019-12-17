@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:45:33 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:57:17 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:35:19 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_X(char *str, t_valeur v, t_detail d)
+int		print_X(char *str, t_valeur v, t_detail d)
 {
 	int	i;
 	int n;
@@ -25,6 +25,7 @@ void	print_X(char *str, t_valeur v, t_detail d)
 	i = 0;
 	j = 0;
 	v.j = 0;
+	v.a = 0;
 	if (v.num)
 		i = ft_atoi(v.num);
 	if (v.pre)
@@ -45,6 +46,7 @@ void	print_X(char *str, t_valeur v, t_detail d)
 	}
 	else
 		i = 0;
+	v.a = i;
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if (d.zero == 1 && d.minus == 0 && d.hash == 1 && d.point == 0)
@@ -89,6 +91,7 @@ void	print_X(char *str, t_valeur v, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&str);
+	return (v.a + n);
 }
 
 int		flag(char *str, int n)
@@ -101,7 +104,7 @@ int		flag(char *str, int n)
 	return (i);
 }
 
-void	details(char *s, char *str, int i, t_unsigned_v val)
+int	details(char *s, char *str, int i, t_unsigned_v val)
 { 
 	t_valeur v;
 	t_detail detail;
@@ -137,7 +140,7 @@ void	details(char *s, char *str, int i, t_unsigned_v val)
 			detail.hash = 1;
 		i++;
 	}
-	print_X(s, v, detail);
+	return (print_X(s, v, detail));
 }
 
 t_detail 	X_flag(char *str, int n)
@@ -195,6 +198,5 @@ int		conv_xx(char *str, va_list s2, int n)
 			v.signe = 1;
 		num = ft_itoa_base(v.i, 16, 1);
 	}
-	details(num, str, n, v);
-	return (0);
+	return (details(num, str, n, v));
 }

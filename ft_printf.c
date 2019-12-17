@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:11:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/09 19:23:12 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:04:00 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,51 +23,58 @@ int		ft_printf(char *str, ...)
 {
 	int		i;
 	int		format;
+	int 	n;
 	t_valeur v;
 	va_list	ap;
 
-	i = 0;
 	v.f = 0;
+	i = 0;
 	format = 0;
+	v.n = 0;
+	n = 0;
 	va_start(ap, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			format = ft_check(str, i + 1, ap, v);
+			n = i;
+			format = ft_check(str, i + 1, ap, &v);
 			i += (format - i) + 1;
+			format++;
 		}
 		if (str[i]  != '%' && str[i])
 		{
 			ft_putchar(str[i]);
+			v.n++;
 			i++;
 		}
 	}
 	va_end(ap);
-	return (v.f);
+	return (v.f + v.n);
+
 }
 
-int		ft_check(char *str, int n, va_list op, t_valeur v)
+int		ft_check(char *str, int n, va_list op, t_valeur *v)
 {
 	t_data		data;
 
-	v.a = 0;
-	v.i = n;
+	v->a = 0;
+	v->i = n;
 	data = g_struct;
 	while (str[n])
 	{
-		v.j = 0;
-		while (v.j < 10)
+		v->j = 0;
+		while (v->j < 10)
 		{
-			if (data.flags[v.j] == str[n])
+			if (data.flags[v->j] == str[n])
 			{
-				v.f += data.flag[v.j](str, op, v.i);
-				v.a = 1;
+				v->f += data.flag[v->j](str, op, v->i);
+				v->a = 1;
 				break ;
 			}
-			v.j++;
+			v->j++;
 		}
-		if (v.a == 1)
+		if (v->a == 1)
 			break ;
 		n++;
 	}

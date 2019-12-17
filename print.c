@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 17:56:52 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 13:17:17 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,15 @@ void	negative_print(t_detail d, t_valeur v, char *str, char c)
 	}
 	ft_strdel(&str);
 }
-void	print_cond(t_detail d, t_valeur v,t_valeur vl, char *str, char c)
+void	cond(t_detail d, t_valeur v,t_valeur vl, char *s, char c)
 {
 	if ((vl.j == 0 && d.zero == 1 && d.minus == 0)
 			|| (vl.j == 0 && v.j > 0 && d.point))
-		negative_print(d, v, str, c);
+		negative_print(d, v, s, c);
 	else if (d.minus == 1)
-		minus_print(d, v, str, c);
+		minus_print(d, v, s, c);
 	else if (d.plus == 1 && d.zero == 1 && d.point == 0)
-		zero_print(v, str, c);
+		zero_print(v, s, c);
 	else
-		normal_print(d, v, str, c);
+		normal_print(d, v, s, c);
 }

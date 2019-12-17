@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:52:39 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 14:32:25 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		f_size(char	*str, int n)
 	return (i);
 }
 
-void	get_det(char *s1, char *str, int i)
+int		get_det(char *s1, char *str, int i)
 {
 	int			n;
 	t_detail	detail;
@@ -50,10 +50,10 @@ void	get_det(char *s1, char *str, int i)
 		}
 		i++;
 	}
-	print_p(v, str, detail);
+	return(print_p(v, str, detail));
 }
 
-void	print_p(t_valeur v, char *str, t_detail d)
+int		print_p(t_valeur v, char *str, t_detail d)
 {
 	int		i;
 	int		j;
@@ -62,6 +62,7 @@ void	print_p(t_valeur v, char *str, t_detail d)
 	j = 0;
 	i = 0;
 	n = ft_strlen(str) + 2;
+	v.a = 0;
 	if (d.point == 1 && ft_atoi(v.pre) > ft_strlen(str))
 		n -= 2;
 	v.n = n;
@@ -80,6 +81,7 @@ void	print_p(t_valeur v, char *str, t_detail d)
 		i -= n;
 	else
 		i = 0;
+	v.a = i;
 	if (d.minus == 1)
 	{
 		ft_putstr("0x");
@@ -113,6 +115,7 @@ void	print_p(t_valeur v, char *str, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&str);
+	return (v.a + n);
 }
 
 int		size_p(unsigned long long int nb)
@@ -148,6 +151,5 @@ int		conv_p(char *str, va_list s2, int n)
 			s[i--] = (adr % 16) + '0';
 		adr /= 16;
 	}
-	get_det(str, s, n);
-	return (0);
+	return (get_det(str, s, n));
 }

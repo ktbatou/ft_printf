@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:59:12 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 13:29:50 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_u(char *str, t_valeur v, t_detail d)
+int		print_u(char *str, t_valeur v, t_detail d)
 {
 	int		i;
 	int 	j;
@@ -22,6 +22,8 @@ void	print_u(char *str, t_valeur v, t_detail d)
 	c = ' ';
 	n = ft_strlen(str);
 	v.n = n;
+	i = 0;
+	j = 0;
 	if (v.num)
 		i = ft_atoi(v.num);
 	if (v.pre)
@@ -37,6 +39,7 @@ void	print_u(char *str, t_valeur v, t_detail d)
 		i -= n;
 	else
 		i = 0;
+	v.a = i;
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if (d.minus == 1)
@@ -70,6 +73,7 @@ void	print_u(char *str, t_valeur v, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&str);
+	return(v.a + n);
 }
 
 int		u_size(char *str, int n)
@@ -86,7 +90,7 @@ int		u_size(char *str, int n)
 	return (i);
 }
 
-void	u_detail(char *num, char *str, int n)
+int		u_detail(char *num, char *str, int n)
 {
 	t_detail detail;
 	t_valeur v;
@@ -94,15 +98,18 @@ void	u_detail(char *num, char *str, int n)
 	detail.minus = 0;
 	detail.zero = 0;
 	detail.point = 0;
-	v.num = ft_strnew(u_size(str, n));
 	v.flag = 0;
 	v.i = 0;
+	v.pre = 0;
+	v.num = 0;
 	while (str[n] != 'u')
 	{
 		if (str[n] == '-')
 			detail.minus = 1;
 		if (str[n] >= '0' && str[n] <= '9')
 		{
+			if (!v.num)
+				v.num = ft_strnew(u_size(str, n));
 			if (str[n] == '0' && v.flag == 0)
 				detail.zero = 1;
 			v.flag = 1;
@@ -116,7 +123,7 @@ void	u_detail(char *num, char *str, int n)
 		}
 		n++;
 	}
-	print_u(num, v, detail);
+	return(print_u(num, v, detail));
 }
 
 t_detail 	flags(char *str, int n)
@@ -168,6 +175,5 @@ int		conv_u(char	*str, va_list s2, int n)
 		v.i = va_arg(s2, unsigned int);
 		num = ft_untoa(v.i);
 	}
-	u_detail(num, str, n);
-	return (0);
+	return(u_detail(num, str, n));
 }

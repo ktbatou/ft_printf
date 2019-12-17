@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:55:50 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:37:46 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int		conv_x(char *str, va_list s2, int n)
 			v.signe = 1;
 		num = ft_itoa_base(v.i, 16, 0);
 	}
-	get_details(str, num, n, v);
-	return (0);
+	return (get_details(str, num, n, v));
 }
 
 int		flag_size(char *str, int n)
@@ -85,7 +84,7 @@ int		flag_size(char *str, int n)
 	return (i);
 }
 
-void	get_details(char *s1 ,char *str, int i, t_unsigned_v vl)
+int	get_details(char *s1 ,char *str, int i, t_unsigned_v vl)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -121,10 +120,10 @@ void	get_details(char *s1 ,char *str, int i, t_unsigned_v vl)
 		}
 		i++;
 	}
-	print_x(v, str, detail);
+	return (print_x(v, str, detail));
 }
 
-void	print_x(t_valeur v, char *s2, t_detail d)
+int		print_x(t_valeur v, char *s2, t_detail d)
 {
 	int		i;
 	int		j;
@@ -137,6 +136,7 @@ void	print_x(t_valeur v, char *s2, t_detail d)
 	i = 0;
 	j = 0;
 	v.j = 0;
+	v.a = 0;
 	if (v.num)
 		i = ft_atoi(v.num);
 	if (v.pre)
@@ -157,6 +157,7 @@ void	print_x(t_valeur v, char *s2, t_detail d)
 	}
 	else
 		i = 0;
+	v.a = i;
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if (d.zero == 1 && d.minus == 0 && d.hash == 1 && d.point == 0)
@@ -201,4 +202,5 @@ void	print_x(t_valeur v, char *s2, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&s2);
+	return (v.a + n);
 }

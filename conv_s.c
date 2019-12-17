@@ -6,16 +6,16 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:19 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 16:27:07 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 14:51:03 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		precision(char *str, int n, char *num)
+int			precision(char *str, int n, char *num)
 {
 	int i;
-	 
+ 
 	i = 0;
 	if (str[n] >= 48 && str[n] <= 57)
 	{
@@ -33,19 +33,18 @@ int		precision(char *str, int n, char *num)
 static int	ft_size(char *str, int i)
 {
 	int n;
-	
+
 	n = 0;
 	while (str[i++] != 's')
 		n++;
 	return (n);
 }
 
-int	conv_s(char *s1, va_list s2, int n)
+int			conv_s(char *s1, va_list s2, int n)
 {
-	char	 	*str;
 	t_detail	detail;
 	t_valeur	v;
-
+	char        *str;
 
 	v.i = 0;
 	detail.minus = 0;
@@ -69,16 +68,17 @@ int	conv_s(char *s1, va_list s2, int n)
 		}
 		n++;
 	}
-	print_num(v.num, v.pre, str, detail);
-	return (0);
+	return (print_num(v.num, v.pre, str, detail));
 }
 
-void	print_num(char *n, char *pre, char *str, t_detail d)
+int			print_num(char *n, char *pre, char *str, t_detail d)
 {
 	int	i;
 	int j;
 	int nn;
+	int v;
 
+	v = 0;
 	i = atoi(n);
 	j = atoi(pre);
 	nn = ft_strlen(str);
@@ -88,6 +88,7 @@ void	print_num(char *n, char *pre, char *str, t_detail d)
 		i -= nn;
 	else
 		i = 0;
+	v = i;
 	if (d.minus == 1)
 	{
 		if (d.point == 1)
@@ -105,7 +106,8 @@ void	print_num(char *n, char *pre, char *str, t_detail d)
 			ft_nputstr(str, j);
 		else
 			ft_putstr(str);
-	}
+    }
 	ft_strdel(&n);
 	ft_strdel(&pre);
+	return (v + nn);
 }

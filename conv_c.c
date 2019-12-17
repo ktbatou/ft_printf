@@ -6,12 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 16:25:11 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 14:39:07 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int	ft_size(char *str, int i)
+int		ft_size(char *str, int i)
 {
 	int	n;
 
@@ -21,17 +22,18 @@ int	ft_size(char *str, int i)
 	return (n);
 }
 
-int	conv_c(char *s1, va_list s2, int n)
+int		conv_c(char *s1, va_list s2, int n)
 {
 	t_valeur	v;
-	char	s;
-	t_detail detail;
-	
+	t_detail	detail;
+	char		s;
+
 	v.i = 0;
-	s = va_arg(s2, int);
+	v.n = 0;
 	detail.minus = 0;
+	s = va_arg(s2, int);
 	v.num = ft_strnew(ft_size(s1, n));
-	while(s1[n] != 'c')
+	while (s1[n] != 'c')
 	{
 		if (s1[n] == '-')
 			detail.minus = 1;
@@ -40,7 +42,9 @@ int	conv_c(char *s1, va_list s2, int n)
 		n++;
 	}
 	print_nb(v.num, s, detail.minus);
-	return (1);
+	if (ft_atoi(v.num) > 0)
+		v.n = ft_atoi(v.num) - 1;
+	return (1 + v.n);
 }
 
 void	print_nb(char *nb, char c, int minus)

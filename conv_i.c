@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:49:14 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/16 13:17:33 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*flag_conv(t_valeur v, t_detail d)
 	return (str);
 }
 
-void	print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
+int		print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 {
 	int		n;
 	char	c;
@@ -68,9 +68,10 @@ void	print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 		c = '0';
 	if (d.plus == 1)
 		v.i--;
-	print_cond(d, v, t, str, c);
+	cond(d, v, t, str, c);
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
+	return(v.i + n);
 }
 
 int		i_size(char	*str, int n)
@@ -87,7 +88,7 @@ int		i_size(char	*str, int n)
 	return (i);
 }
 
-void	i_detail(t_valeur val, t_detail d, char *str, int n)
+int		i_detail(t_valeur val, t_detail d, char *str, int n)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -124,7 +125,7 @@ void	i_detail(t_valeur val, t_detail d, char *str, int n)
 		}
 		n++;
 	}
-	print_i(v, val, detail, d);
+	return (print_i(v, val, detail, d));
 }
 
 t_detail	type_flag(char *str, int n)
@@ -176,6 +177,5 @@ int		conv_i(char	*str, va_list s2, int n)
 		if ((v.i = va_arg(s2, int)) >= 0)
 			v.j = 1;
 	}
-	i_detail(v, det, str, n);
-	return (0);
+	return (i_detail(v, det, str, n));
 }

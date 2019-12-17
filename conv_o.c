@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/12 19:51:05 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:41:08 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_o(char *str , t_valeur v, t_detail d)
+int		print_o(char *str , t_valeur v, t_detail d)
 {
 	int		i;
 	int		j;
@@ -24,6 +24,7 @@ void	print_o(char *str , t_valeur v, t_detail d)
 	v.n = n;
 	i = 0;
 	v.j = 0;
+	v.a = 0;
 	if (v.num)
 		i = ft_atoi(v.num);
 	if (v.pre)
@@ -43,6 +44,7 @@ void	print_o(char *str , t_valeur v, t_detail d)
 	if ((d.hash == 1 && (v.n > v.j))
 			|| (d.hash == 1 && v.j == 0))
 		i--;
+	v.a = i;
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c  ='0';
 	if (d.minus == 1)
@@ -83,6 +85,7 @@ void	print_o(char *str , t_valeur v, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&str);
+	return (v.a + n);
 }
 
 int		num_size(char *str, int n)
@@ -99,7 +102,7 @@ int		num_size(char *str, int n)
 	return(i);
 }
 
-void	detail_o(char *nb, char *str, int n, t_unsigned_v vl)
+int		detail_o(char *nb, char *str, int n, t_unsigned_v vl)
 {
 	t_detail detail;
 	t_valeur v;
@@ -135,7 +138,7 @@ void	detail_o(char *nb, char *str, int n, t_unsigned_v vl)
 		}
 		n++;
 	}
-	print_o(nb, v, detail);
+	return(print_o(nb, v, detail));
 }
 
 t_detail 	flag_det(char *str, int n)
@@ -193,6 +196,5 @@ int		conv_o(char	*str, va_list s2, int n)
 			v.signe = 1;
 		num = ft_itoa_base(v.i, 8, 0);
 	}
-	detail_o(num, str, n, v);
-	return (0);
+	return(detail_o(num, str, n, v));
 }	
