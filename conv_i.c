@@ -6,37 +6,20 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/16 13:17:33 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/19 18:21:23 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*flag_conv(t_valeur v, t_detail d)
-{
-	char 	*str;
-
-	if (d.l == 1)
-		str = ft_ntoa(v.l);
-	else if (d.l == 2)
-		str = ft_ntoa(v.ll);
-	else if (d.h == 1)
-		str = ft_ntoa(v.h);
-	else if (d.h == 2)
-		str = ft_ntoa(v.hh);
-	else
-		str = ft_ntoa(v.i);
-	return (str);
-}
-
-int		print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
+int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 {
 	int		n;
 	char	c;
 	char	*str;
 
 	c = ' ';
-	str = flag_conv(t, det);
+	str = type_conv(t, det);
 	n = ft_strlen(str);
 	v.n = n;
 	v.i = 0;
@@ -71,10 +54,10 @@ int		print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	cond(d, v, t, str, c);
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
-	return(v.i + n);
+	return (v.i + n);
 }
 
-int		i_size(char	*str, int n)
+int			i_size(char *str, int n)
 {
 	int i;
 
@@ -88,7 +71,36 @@ int		i_size(char	*str, int n)
 	return (i);
 }
 
-int		i_detail(t_valeur val, t_detail d, char *str, int n)
+int			i_check(t_detail *d, t_valeur *v, char *s, int n)
+{
+	int i;
+
+	i = 0;
+	if (s[n] == '+' && v->n == 1)
+		d->plus = 1;
+	if (s[n] == '-')
+		d->minus = 1;
+	if (s[n] == ' ' && v->n == 1)
+		d->space = 1;
+	if (s[n] >= '0' && s[n] <= '9')
+	{
+		if (!v->num)
+			v->num = ft_strnew(v->i);
+		if (s[n] == '0' && v->flag == 0)
+			d->zero = 1;
+		v->flag = 1;
+		v->num[v->j++] = s[n];
+	}
+	if (s[n] == '.')
+	{
+		v->pre = ft_strnew(pre_size(s, n + 1));
+		i = prec(s, n + 1, *v);
+		d->point = 1;
+	}
+	return (i);
+}
+
+int			i_detail(t_valeur val, t_detail d, char *str, int n)
 {
 	t_valeur	v;
 	t_detail	detail;
@@ -102,80 +114,22 @@ int		i_detail(t_valeur val, t_detail d, char *str, int n)
 	v.flag = 0;
 	v.pre = 0;
 	v.num = ft_strnew(i_size(str, n));
+	v.n = val.j;
 	while (str[n] != 'i')
 	{
-		if (str[n] == '+' && val.j == 1)
-			detail.plus = 1;
-		if (str[n] == '-')
-			detail.minus = 1;
-		if (str[n] == ' ' && val.j == 1)
-			detail.space = 1;
-		if (str[n] >= '0' && str[n] <= '9')
-		{
-			if (str[n] == '0' && v.flag == 0)
-				detail.zero = 1;
-			v.flag = 1;
-			v.num[v.i++] = str[n];
-		}
-		if (str[n] == '.')
-		{
-			v.pre = ft_strnew(pre_size(str, n + 1));
-			n += prec(str, n + 1, v);
-			detail.point = 1;
-		}
+		n += i_check(&detail, &v, str, n);
 		n++;
 	}
 	return (print_i(v, val, detail, d));
 }
 
-t_detail	type_flag(char *str, int n)
-{
-	t_detail detail;
-
-	detail.l = 0;
-	detail.h = 0;
-	while(str[n] != 'i')
-	{
-		if (str[n] == 'l')
-			detail.l++;
-		if (str[n] == 'h')
-			detail.h++;
-		n++;
-	}
-	return (detail);
-}
-
-int		conv_i(char	*str, va_list s2, int n)
+int			conv_i(char *str, va_list s2, int n)
 {
 	t_detail det;
 	t_valeur v;
 
 	det = type_flag(str, n);
 	v.j = 0;
-	if (det.l == 1)
-	{
-		if ((v.l = va_arg(s2, long int)) >= 0)
-			v.j = 1;
-	}
-	else if (det.l == 2)
-	{
-		if ((v.ll = va_arg(s2, long long int)) >= 0)
-			v.j = 1;
-	}
-	else if (det.h == 1)
-	{
-		if ((v.h = (short int)va_arg(s2, int)) >= 0)
-			v.j = 1;
-	}
-	else if (det.h == 2)
-	{
-		if ((v.hh = (signed char)va_arg(s2, int)) >= 0)
-			v.j = 1;
-	}
-	else
-	{
-		if ((v.i = va_arg(s2, int)) >= 0)
-			v.j = 1;
-	}
+	types(s2, det, &v);
 	return (i_detail(v, det, str, n));
 }

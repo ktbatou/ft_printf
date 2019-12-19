@@ -6,18 +6,18 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/16 13:29:50 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/19 18:34:00 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_u(char *str, t_valeur v, t_detail d)
+int			print_u(char *str, t_valeur v, t_detail d)
 {
 	int		i;
-	int 	j;
+	int		j;
 	char	c;
-	int 	n;
+	int		n;
 
 	c = ' ';
 	n = ft_strlen(str);
@@ -73,10 +73,10 @@ int		print_u(char *str, t_valeur v, t_detail d)
 	ft_strdel(&v.num);
 	ft_strdel(&v.pre);
 	ft_strdel(&str);
-	return(v.a + n);
+	return (v.a + n);
 }
 
-int		u_size(char *str, int n)
+int			u_size(char *str, int n)
 {
 	int i;
 
@@ -90,7 +90,32 @@ int		u_size(char *str, int n)
 	return (i);
 }
 
-int		u_detail(char *num, char *str, int n)
+int			u_check(char *str, t_detail *d, t_valeur *v, int n)
+{
+	int i;
+
+	i = 0;
+	if (str[n] == '-')
+		d->minus = 1;
+	if (str[n] >= '0' && str[n] <= '9')
+	{
+		if (!v->num)
+			v->num = ft_strnew(u_size(str, n));
+		if (str[n] == '0' && v->flag == 0)
+			d->zero = 1;
+		v->flag = 1;
+		v->num[v->i++] = str[n];
+	}
+	if (str[n] == '.')
+	{
+		v->pre = ft_strnew(pre_size(str, n + 1));
+		i = prec(str, n + 1, *v);
+		d->point = 1;
+	}
+	return (i);
+}
+
+int			u_detail(char *num, char *str, int n)
 {
 	t_detail detail;
 	t_valeur v;
@@ -104,76 +129,19 @@ int		u_detail(char *num, char *str, int n)
 	v.num = 0;
 	while (str[n] != 'u')
 	{
-		if (str[n] == '-')
-			detail.minus = 1;
-		if (str[n] >= '0' && str[n] <= '9')
-		{
-			if (!v.num)
-				v.num = ft_strnew(u_size(str, n));
-			if (str[n] == '0' && v.flag == 0)
-				detail.zero = 1;
-			v.flag = 1;
-			v.num[v.i++] = str[n];
-		}
-		if  (str[n] == '.')
-		{
-			v.pre = ft_strnew(pre_size(str, n + 1));
-			n += prec(str, n + 1, v);
-			detail.point =  1;
-		}
+		n += u_check(str, &detail, &v, n);
 		n++;
 	}
-	return(print_u(num, v, detail));
+	return (print_u(num, v, detail));
 }
 
-t_detail 	flags(char *str, int n)
-{
-	t_detail det;
-
-	det.l = 0;
-	det.h = 0;
-	while (str[n] != 'u')
-	{
-		if (str[n] == 'l')
-			det.l++;
-		if (str[n] == 'h')
-			det.h++;
-		n++;
-	}
-	return(det);
-}
-
-int		conv_u(char	*str, va_list s2, int n)
+int			conv_u(char *str, va_list s2, int n)
 {
 	t_unsigned_v	v;
-	t_detail 		d;
+	t_detail		d;
 	char			*num;
 
 	d = flags(str, n);
-	if (d.l == 1)
-	{
-		v.l = va_arg(s2, unsigned long int);
-		num = ft_untoa(v.l);
-	}
-	else if (d.l == 2)
-	{
-		v.ll = va_arg(s2, unsigned long long int);
-		num = ft_untoa(v.ll);
-	}
-	else if (d.h == 1)
-	{
-		v.h = (unsigned short int)va_arg(s2, unsigned int);
-		num = ft_untoa(v.h);
-	}
-	else if (d.h == 2)
-	{
-		v.hh = (unsigned char)va_arg(s2, unsigned int);
-		num = ft_untoa(v.hh);
-	}
-	else
-	{
-		v.i = va_arg(s2, unsigned int);
-		num = ft_untoa(v.i);
-	}
-	return(u_detail(num, str, n));
+	u_types(d, &v, &num, s2);
+	return (u_detail(num, str, n));
 }

@@ -1,33 +1,16 @@
 /* ************************************************************************** */
-/*                                                                            */
+ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   conv_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/17 17:50:41 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/18 13:40:35 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char		*type_conv(t_valeur v, t_detail det)
-{
-	char	*str;
-
-	if (det.l == 1)
-		str = ft_ntoa(v.l);
-	else if (det.l == 2)
-		str = ft_ntoa(v.ll);
-	else if (det.h == 1)
-		str = ft_ntoa(v.h);
-	else if (det.h == 2)
-		str = ft_ntoa(v.hh);
-	else
-		str = ft_ntoa(v.i);
-	return (str);
-}
 
 int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 {
@@ -35,9 +18,9 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 	char	*str;
 	char	c;
 
-	str = type_conv(vl, det);
 	c = ' ';
 	v.i = 0;
+	str = type_conv(vl, det);
 	n = ft_strlen(str);
 	v.n = n;
 	if ((vl.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
@@ -85,6 +68,35 @@ int			string_size(char *str, int n)
 	return (i);
 }
 
+int			checker_d(t_detail *d, t_valeur *v, char *s, int n)
+{
+	int i;
+
+	i = 0;
+	if (s[n] == '+' && v->n == 1)
+		d->plus = 1;
+	if (s[n] == '-')
+		d->minus = 1;
+	if (s[n] == ' ' && v->n == 1)
+		d->space = 1;
+	if (s[n] >= '0' && s[n] <= '9')
+	{
+		if (!v->num)
+			v->num = ft_strnew(v->i);
+		if (s[n] == '0' && v->flag == 0)
+			d->zero = 1;
+		v->flag = 1;
+		v->num[v->j++] = s[n];
+	}
+	if (s[n] == '.')
+	{
+		v->pre = ft_strnew(pre_size(s, n + 1));
+		i = prec(s, n + 1, *v);
+		d->point = 1;
+	}
+	return (i);
+}
+
 int			d_detail(t_valeur valeur, char *str, int n, t_detail d)
 {
 	t_valeur	v;
@@ -100,29 +112,10 @@ int			d_detail(t_valeur valeur, char *str, int n, t_detail d)
 	v.pre = 0;
 	v.num = 0;
 	v.i = string_size(str, n);
+	v.n = valeur.j;
 	while (str[n] != 'd')
 	{
-		if (str[n] == '+' && valeur.j == 1)
-			detail.plus = 1;
-		if (str[n] == '-')
-			detail.minus = 1;
-		if (str[n] == ' ' && valeur.j == 1)
-			detail.space = 1;
-		if (str[n] >= '0' && str[n] <= '9')
-		{
-			if (!v.num)
-				v.num = ft_strnew(v.i);
-			if (str[n] == '0' && v.flag == 0)
-				detail.zero = 1;
-			v.flag = 1;
-			v.num[v.j++] = str[n];
-		}
-		if (str[n] == '.')
-		{
-			v.pre = ft_strnew(pre_size(str, n + 1));
-			n += prec(str, n + 1, v);
-			detail.point = 1;
-		}
+		n += checker_d(&detail, &v, str, n);
 		n++;
 	}
 	return (print_d(v, valeur, detail, d));
