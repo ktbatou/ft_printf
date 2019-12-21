@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/16 13:17:17 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/20 18:36:55 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	minus_print(t_detail d, t_valeur v, char *str, char c)
 	ft_strdel(&str);
 }
 
-void    normal_print(t_detail d, t_valeur v, char *str, char c)
+void	normal_print(t_detail d, t_valeur v, char *str, char c)
 {
 	if (d.space == 1 && d.plus == 0)
 	{
@@ -58,7 +58,7 @@ void    normal_print(t_detail d, t_valeur v, char *str, char c)
 	ft_strdel(&str);
 }
 
-void    zero_print(t_valeur v, char *str, char c)
+void	zero_print(t_valeur v, char *str, char c)
 {
 	ft_putchar('+');
 	while (v.i-- > 0)
@@ -107,8 +107,14 @@ void	negative_print(t_detail d, t_valeur v, char *str, char c)
 	}
 	ft_strdel(&str);
 }
-void	cond(t_detail d, t_valeur v,t_valeur vl, char *s, char c)
+
+void	cond(t_detail d, t_valeur v, t_valeur vl, char *s)
 {
+	char c;
+
+	c = ' ';
+	if (d.zero == 1 && d.minus == 0 && d.point == 0)
+		c = '0';
 	if ((vl.j == 0 && d.zero == 1 && d.minus == 0)
 			|| (vl.j == 0 && v.j > 0 && d.point))
 		negative_print(d, v, s, c);
@@ -118,4 +124,6 @@ void	cond(t_detail d, t_valeur v,t_valeur vl, char *s, char c)
 		zero_print(v, s, c);
 	else
 		normal_print(d, v, s, c);
+	ft_strdel(&v.num);
+	ft_strdel(&v.pre);
 }

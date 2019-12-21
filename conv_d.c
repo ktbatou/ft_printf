@@ -1,12 +1,12 @@
 /* ************************************************************************** */
- /*                                                                            */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   conv_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/18 13:40:35 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 14:19:01 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 {
 	int		n;
 	char	*str;
-	char	c;
 
-	c = ' ';
 	v.i = 0;
 	str = type_conv(vl, det);
 	n = ft_strlen(str);
@@ -28,29 +26,14 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 	if (v.num)
 		v.i = ft_atoi(v.num);
 	if (v.pre)
-	{
-		v.j = ft_atoi(v.pre);
-		if (v.j > n)
-		{
-			n = v.j;
-			if (vl.j == 0)
-				n++;
-		}
-		if (v.j == 0)
-			n = 0;
-		v.j -= v.n;
-	}
-	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-		c = '0';
+		n = pre_vlr(&v, vl, n);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
 	if (d.plus == 1)
 		v.i--;
-	cond(d, v, vl, str, c);
-	ft_strdel(&v.num);
-	ft_strdel(&v.pre);
+	cond(d, v, vl, str);
 	return (v.i + n);
 }
 
@@ -102,15 +85,7 @@ int			d_detail(t_valeur valeur, char *str, int n, t_detail d)
 	t_valeur	v;
 	t_detail	detail;
 
-	detail.space = 0;
-	detail.plus = 0;
-	detail.minus = 0;
-	detail.zero = 0;
-	detail.point = 0;
-	v.j = 0;
-	v.flag = 0;
-	v.pre = 0;
-	v.num = 0;
+	intial(&detail, &v);
 	v.i = string_size(str, n);
 	v.n = valeur.j;
 	while (str[n] != 'd')
@@ -127,11 +102,7 @@ int			conv_d(char *str, va_list s2, int n)
 	t_detail	detail;
 	t_valeur	vlr;
 
-	detail.l = 0;
-	detail.h = 0;
-	vlr.l = 0;
-	vlr.h = 0;
-	vlr.j = 0;
+	intial(&detail, &vlr);
 	detail = flag_detail(str, n);
 	types(s2, detail, &vlr);
 	return (d_detail(vlr, str, n, detail));

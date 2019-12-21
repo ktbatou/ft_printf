@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   intialisation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 14:10:10 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/21 16:12:17 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/12/20 18:44:20 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/12/21 16:05:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_nputstr(char const *s, int n)
+void	intial(t_detail *d, t_valeur *v)
 {
-	int i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] && i < n)
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
+	d->minus = 0;
+	d->hash = 0;
+	d->point = 0;
+	d->plus = 0;
+	d->zero = 0;
+	d->space = 0;
+	d->h = 0;
+	d->l = 0;
+	v->i = 0;
+	v->j = 0;
+	v->a = 0;
+	v->n = 0;
+	v->flag = 0;
+	v->num = 0;
+	v->pre = 0;
+	v->h = 0;
+	v->l = 0;
+	v->hh = 0;
+	v->ll = 0;
 }

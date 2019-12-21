@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:52:34 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/28 16:05:42 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 16:25:08 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned long long int		ft_count(unsigned long long int n)
+unsigned long long int		ft_count(unsigned long long int n)
 {
 	int nb;
 
@@ -27,7 +27,7 @@ static unsigned long long int		ft_count(unsigned long long int n)
 	return (nb);
 }
 
-static char		*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
+char						*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
 {
 	str[nb] = '\0';
 	while (nb > i)
@@ -38,11 +38,11 @@ static char		*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
 	return (str);
 }
 
-char			*ft_untoa(unsigned long long int n)
+char						*ft_untoa(unsigned long long int n)
 {
 	unsigned long long int	nn;
 	int						i;
-	unsigned long long int			nb;
+	unsigned long long int	nb;
 	char					*str;
 
 	i = 0;

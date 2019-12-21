@@ -1,27 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   o_types.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 14:10:10 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/21 16:12:17 by ktbatou          ###   ########.fr       */
+/*   Created: 2019/12/21 17:32:20 by ktbatou           #+#    #+#             */
+/*   Updated: 2019/12/21 17:37:04 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_nputstr(char const *s, int n)
-{
-	int i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] && i < n)
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-}
+void	o_types(t_detail det, t_valeur v

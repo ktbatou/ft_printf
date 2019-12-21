@@ -9,7 +9,7 @@ int	main()
 
 	//while (i-- >= 0)
 //	printf("-- %d --",ft_printf("h %x e %o llo %6.9u an %c d #010%d an %d  d #-%i %s",7410,1010, 99, 'F', 1, 11,45, "i am me"));
-	ft_printf("%-5");
+	ft_printf("%u",132556788654);
 //	 printf("-- %d --",printf("h %x e %o llo %6.9u an %c d #010%d an %d  d #-%i %s",7410,1010, 99, 'F', 1, 11,45, "i am me"));
 //	printf ("\n%d ", printf("%.d", 55));
 //	printf("\n%20p", &i);

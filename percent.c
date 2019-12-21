@@ -6,12 +6,12 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 13:48:41 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/11/23 14:48:22 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 16:26:55 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
+
 void	print_prc(char *num, t_detail d)
 {
 	int		i;
@@ -79,7 +79,7 @@ void	detail_prc(char *str, int n)
 	print_prc(v.num, detail);
 }
 
-int		percent(char *str, va_list  s2, int n)
+int		percent(char *str, va_list s2, int n)
 {
 	detail_prc(str, n);
 	return (0);

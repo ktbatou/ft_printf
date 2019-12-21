@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/19 18:21:23 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 14:25:20 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 {
 	int		n;
-	char	c;
 	char	*str;
 
-	c = ' ';
 	str = type_conv(t, det);
 	n = ft_strlen(str);
 	v.n = n;
@@ -31,29 +29,14 @@ int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	if (v.num)
 		v.i = ft_atoi(v.num);
 	if (v.pre)
-	{
-		v.j = ft_atoi(v.pre);
-		if (v.j > n)
-		{
-			n = v.j;
-			if (t.j == 0)
-				n++;
-		}
-		if (v.j == 0)
-			n = 0;
-		v.j -= v.n;
-	}
+		n = pre_vlr(&v, t, n);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
-	if (d.minus == 0 && d.zero == 1 && d.point == 0)
-		c = '0';
 	if (d.plus == 1)
 		v.i--;
-	cond(d, v, t, str, c);
-	ft_strdel(&v.num);
-	ft_strdel(&v.pre);
+	cond(d, v, t, str);
 	return (v.i + n);
 }
 
@@ -105,14 +88,7 @@ int			i_detail(t_valeur val, t_detail d, char *str, int n)
 	t_valeur	v;
 	t_detail	detail;
 
-	v.i = 0;
-	detail.minus = 0;
-	detail.plus = 0;
-	detail.zero = 0;
-	detail.space = 0;
-	detail.point = 0;
-	v.flag = 0;
-	v.pre = 0;
+	intial(&detail, &v);
 	v.num = ft_strnew(i_size(str, n));
 	v.n = val.j;
 	while (str[n] != 'i')

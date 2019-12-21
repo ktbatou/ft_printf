@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/19 18:34:00 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/20 18:20:52 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,29 @@
 
 int			print_u(char *str, t_valeur v, t_detail d)
 {
-	int		i;
-	int		j;
-	char	c;
 	int		n;
 
-	c = ' ';
 	n = ft_strlen(str);
 	v.n = n;
-	i = 0;
-	j = 0;
+	v.i = 0;
+	v.j = 0;
 	if (v.num)
-		i = ft_atoi(v.num);
+		v.i = ft_atoi(v.num);
 	if (v.pre)
 	{
-		j = ft_atoi(v.pre);
-		if (j > n)
-			n = j;
-		if (j == 0)
+		v.j = ft_atoi(v.pre);
+		if (v.j > n)
+			n = v.j;
+		if (v.j == 0)
 			n = 0;
-		j -= v.n;
+		v.j -= v.n;
 	}
-	if (i > n)
-		i -= n;
+	if (v.i > n)
+		v.i -= n;
 	else
-		i = 0;
-	v.a = i;
-	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-		c = '0';
-	if (d.minus == 1)
-	{
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-		while (i-- > 0)
-			ft_putchar(c);
-	}
-	else
-	{
-		while (i-- > 0)
-			ft_putchar(c);
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-	}
-	ft_strdel(&v.num);
-	ft_strdel(&v.pre);
-	ft_strdel(&str);
+		v.i = 0;
+	v.a = v.i;
+	cond_u(d, v, str);
 	return (v.a + n);
 }
 

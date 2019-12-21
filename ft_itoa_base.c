@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 18:48:00 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/02 16:50:46 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 16:11:21 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long long int	size_base(unsigned long long int i, int base)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (i == 0)
@@ -24,14 +24,14 @@ long long int	size_base(unsigned long long int i, int base)
 		i /= base;
 		j++;
 	}
-	return(j);
+	return (j);
 }
 
-char	*ft_itoa_base(unsigned long long int n, int base, int a)
+char			*ft_itoa_base(unsigned long long int n, int base, int a)
 {
-	long long int		i;
-	char	*num;
-	char c;
+	long long int	i;
+	char			*num;
+	char			c;
 
 	c = 'a';
 	i = size_base(n, base);
@@ -43,11 +43,9 @@ char	*ft_itoa_base(unsigned long long int n, int base, int a)
 	{
 		if ((n % base) >= 10)
 			num[i--] = ((n % base) % 10) + c;
-	
 		else
 			num[i--] = '0' + (n % base);
 		n /= base;
 	}
 	return (num);
 }
-

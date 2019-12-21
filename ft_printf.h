@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/19 18:23:42 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/21 14:17:56 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct	s_unsigned_v
 	unsigned long long	ll;
 }				t_unsigned_v;
 
+int				pre_vlr(t_valeur *v, t_valeur vl, int n);
+void			intial(t_detail *d, t_valeur *v);
+void			cond_u(t_detail d, t_valeur v, char *str);
 t_detail		flags(char *str, int n);
 void			u_types(t_detail d, t_unsigned_v *v, char **num, va_list s2);
 t_detail    	type_flag(char *str, int n);
@@ -71,7 +74,7 @@ char			*type_conv(t_valeur v, t_detail det);
 void    		types(va_list s2, t_detail detail , t_valeur *vlr);
 void			cond_s(t_detail d, char *str, int i, int j);
 void			negative_print(t_detail d, t_valeur v, char *str, char c);
-void			cond(t_detail d, t_valeur v, t_valeur vl, char *s, char c);
+void			cond(t_detail d, t_valeur v, t_valeur vl, char *s);
 void			zero_print(t_valeur v, char *str, char c);
 void			minus_print(t_detail d, t_valeur v, char *str, char c);
 void			normal_print(t_detail d, t_valeur v, char *str, char c);
