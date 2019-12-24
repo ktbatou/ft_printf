@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/16 14:32:25 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/24 15:29:49 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		f_size(char	*str, int n)
+int		f_size(char *str, int n)
 {
 	int	i;
 
@@ -29,9 +29,7 @@ int		get_det(char *s1, char *str, int i)
 	t_valeur	v;
 
 	n = 0;
-	detail.minus = 0;
-	v.num = 0;
-	v.pre = 0;
+	intial(&detail, &v);
 	while (s1[i] != 'p')
 	{
 		if (s1[i] == '-')
@@ -42,80 +40,44 @@ int		get_det(char *s1, char *str, int i)
 				v.num = ft_strnew(f_size(s1, i));
 			v.num[n++] = s1[i];
 		}
-		if  (s1[i] == '.')
+		if (s1[i] == '.')
 		{
 			v.pre = ft_strnew(pre_size(s1, i + 1));
-			n += prec(s1, i + 1, v);
-			detail.point =  1;
+			i += prec(s1, i + 1, v);
+			detail.point = 1;
 		}
 		i++;
 	}
-	return(print_p(v, str, detail));
+	return (print_p(&v, str, detail));
 }
 
-int		print_p(t_valeur v, char *str, t_detail d)
+int		print_p(t_valeur *v, char *str, t_detail d)
 {
-	int		i;
-	int		j;
 	int		n;
 
-	j = 0;
-	i = 0;
 	n = ft_strlen(str) + 2;
-	v.a = 0;
-	if (d.point == 1 && ft_atoi(v.pre) > ft_strlen(str))
+	v->a = 0;
+	if (d.point == 1 && ft_atoi(v->pre) > ft_strlen(str))
 		n -= 2;
-	v.n = n;
-	if (v.num)
-		i = ft_atoi(v.num);
-	if (v.pre)
+	v->n = n;
+	if (v->num)
+		v->i = ft_atoi(v->num);
+	if (v->pre)
 	{
-		j = ft_atoi(v.pre);
-		if (j > n)
-			n = j;
-		if (j == 0)
+		v->j = ft_atoi(v->pre);
+		if (v->j > n)
+			n = v->j;
+		if (v->j == 0)
 			n = 0;
-		j -= v.n;
+		v->j -= v->n;
 	}
-	if (i > n)
-		i -= n;
+	if (v->i > n)
+		v->i -= n;
 	else
-		i = 0;
-	v.a = i;
-	if (d.minus == 1)
-	{
-		ft_putstr("0x");
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-		while (i-- > 0)
-			ft_putchar(' ');
-	}
-	else
-	{
-		while (i-- > 0)
-			ft_putchar(' ');
-		ft_putstr("0x");
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(str, 0);
-		else
-			ft_putstr(str);
-	}
-	ft_strdel(&v.num);
-	ft_strdel(&v.pre);
-	ft_strdel(&str);
-	return (v.a + n);
+		v->i = 0;
+	v->a = v->i;
+	p_conv(d, *v, str);
+	return (v->a + n);
 }
 
 int		size_p(unsigned long long int nb)
@@ -136,7 +98,7 @@ int		size_p(unsigned long long int nb)
 int		conv_p(char *str, va_list s2, int n)
 {
 	unsigned long long int	adr;
-	int 					i;
+	int						i;
 	char					*s;
 
 	adr = va_arg(s2, unsigned long long int);

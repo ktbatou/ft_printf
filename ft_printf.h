@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/21 14:17:56 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/24 15:26:47 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef struct	s_unsigned_v
 	unsigned long long	ll;
 }				t_unsigned_v;
 
+void			p_conv(t_detail d, t_valeur v, char *str);
+void			o_cond(t_detail d, t_valeur v, char *str);
+char			*conv_flag(t_unsigned_v v, t_detail d);
+void			o_types(t_detail *det, t_unsigned_v *v, va_list s2);
+t_detail		flag_det(char *str, int n);
 int				pre_vlr(t_valeur *v, t_valeur vl, int n);
 void			intial(t_detail *d, t_valeur *v);
 void			cond_u(t_detail d, t_valeur v, char *str);
@@ -91,7 +96,7 @@ int				conv_u(char *str, va_list s2, int n);
 int				conv_i(char *str, va_list s2, int n);
 int				conv_d(char *str, va_list s2, int n);
 int				conv_xx(char *str, va_list s2, int n);
-int				print_p(t_valeur v, char *str, t_detail d);
+int				print_p(t_valeur *v, char *str, t_detail d);
 int				conv_p(char *str, va_list s2, int n);
 int				flag_size(char *str, int n);
 int				get_details(char *s1, char *str, int i, t_unsigned_v vl);
