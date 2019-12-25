@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 13:48:41 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/21 16:26:55 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/24 19:12:10 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_prc(char *num, t_detail d)
 	}
 }
 
-int		count(char *str, int n)
+int		cnt(char *str, int n)
 {
 	int	i;
 
@@ -62,7 +62,7 @@ void	detail_prc(char *str, int n)
 	v.j = 0;
 	detail.minus = 0;
 	detail.zero = 0;
-	v.num = ft_strnew(count(str, n));
+	v.num = ft_strnew(cnt(str, n));
 	while (str[n] != '%')
 	{
 		if (str[n] == '-')

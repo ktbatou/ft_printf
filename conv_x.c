@@ -6,68 +6,22 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/15 18:37:46 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/25 12:54:36 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_detail 	x_flag(char *str, int n)
-{
-	t_detail det;
-
-	det.l = 0;
-	det.h = 0;
-	while (str[n] != 'x')
-	{
-		if (str[n] == 'l')
-			det.l++;
-		if (str[n] == 'h')
-			det.h++;
-		n++;
-	}
-	return(det);
-}
-
 int		conv_x(char *str, va_list s2, int n)
 {
-	char *num;
-	t_detail d;
-	t_unsigned_v v;
+	char			*num;
+	t_detail		d;
+	t_unsigned_v	v;
 
 	d = x_flag(str, n);
 	v.signe = 0;
-	if (d.l == 1)
-	{
-		if ((v.l = va_arg(s2, unsigned long int)) != 0)
-			v.signe = 1;
-		num = ft_itoa_base(v.l, 16, 0);
-	}
-	else if (d.l == 2)
-	{
-		if ((v.ll = va_arg(s2, unsigned long long int)) != 0)
-			v.signe = 1;
-		num = ft_itoa_base(v.ll, 16, 0);
-	}
-	else if (d.h == 1)
-	{
-		if ((v.h = (unsigned short int)va_arg(s2, unsigned int)) != 0)
-			v.signe = 1;
-		num = ft_itoa_base(v.h, 16, 0);
-	}
-	else if (d.h == 2)
-	{
-		if ((v.hh = (unsigned char)va_arg(s2, unsigned int)) != 0)
-			v.signe = 1;
-		num = ft_itoa_base(v.hh, 16, 0);
-	}
-	else
-	{
-		if ((v.i = va_arg(s2, unsigned int)) != 0)
-			v.signe = 1;
-		num = ft_itoa_base(v.i, 16, 0);
-	}
-	return (get_details(str, num, n, v));
+	x_types(s2, &v, d);
+	return (get_details(str, n, v, d));
 }
 
 int		flag_size(char *str, int n)
@@ -84,123 +38,60 @@ int		flag_size(char *str, int n)
 	return (i);
 }
 
-int	get_details(char *s1 ,char *str, int i, t_unsigned_v vl)
+int		get_details(char *s1, int i, t_unsigned_v vl, t_detail d)
 {
 	t_valeur	v;
 	t_detail	detail;
 
-	v.j = 0;
-	v.flag = 0;
-	detail.zero = 0;
-	detail.minus = 0;
-	detail.hash = 0;
-	detail.point = 0;
-	v.num = 0;
-	v.pre = 0;
+	intial(&detail, &v);
 	while (s1[i] != 'x')
 	{
-		if (s1[i] == '-')
-			detail.minus = 1;
+		detail.minus = s1[i] == '-' ? 1 : detail.minus;
 		if (s1[i] == '#' && vl.signe == 1)
 			detail.hash = 1;
 		if (s1[i] >= 48 && s1[i] <= 57)
 		{
-			if (!v.num)
-				v.num = ft_strnew(flag_size(s1, i));
+			v.num = !v.num ? ft_strnew(flag_size(s1, i)) : v.num;
 			if (s1[i] == '0' && v.flag == 0)
 				detail.zero = 1;
-			v.flag = 1; 
+			v.flag = 1;
 			v.num[v.j++] = s1[i];
 		}
-		if (s1[i] == '.')
+		if (s1[i] == '.' && (detail.point = 1))
 		{
 			v.pre = ft_strnew(pre_size(s1, i + 1));
 			i += prec(s1, i + 1, v);
-			detail.point = 1;
 		}
 		i++;
 	}
-	return (print_x(v, str, detail));
+	return (print_x(&v, vl, detail, d));
 }
 
-int		print_x(t_valeur v, char *s2, t_detail d)
+int		print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det)
 {
-	int		i;
-	int		j;
-	int		n;
-	char	c;
+	char	*s2;
 
-	c = ' ';
-	n = ft_strlen(s2);
-	v.n = n;
-	i = 0;
-	j = 0;
-	v.j = 0;
-	v.a = 0;
-	if (v.num)
-		i = ft_atoi(v.num);
-	if (v.pre)
+	s2 = x_conv(vl, det);
+	v->f = ft_strlen(s2);
+	v->n = v->f;
+	if (v->num)
+		v->i = ft_atoi(v->num);
+	if (v->pre)
 	{
-		j = ft_atoi(v.pre);
-		v.j = j;
-		if (j > n)
-			n = j;
-		if (j == 0)
-			n = 0;
-		j -= v.n;
+		v->j = ft_atoi(v->pre);
+		v->f = v->j > v->f ? v->j : v->f;
+		if (v->j == 0)
+			v->f = 0;
+		v->j -= v->n;
 	}
-	if (i > n)
+	if (v->i > v->f)
 	{
-		i -= n;
-		if (d.hash == 1)
-			i -= 2;
+		v->i -= v->f;
+		v->i -= d.hash == 1 ? 2 : 0;
 	}
 	else
-		i = 0;
-	v.a = i;
-	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-		c = '0';
-	if (d.zero == 1 && d.minus == 0 && d.hash == 1 && d.point == 0)
-	{
-		ft_putstr("0x");
-		while (i-- > 0)
-			ft_putchar('0');
-		ft_putstr(s2);
-	}
-	else if (d.minus == 1)
-	{
-		if (d.hash == 1)
-			ft_putstr("0x");
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(s2, 0);
-		else
-			ft_putstr(s2);
-		while (i-- > 0)
-			ft_putchar(c);
-	}
-	else
-	{
-		while (i-- > 0)
-			ft_putchar(c);
-		if (d.hash == 1)
-			ft_putstr("0x");
-		if (d.point == 1)
-		{
-			while (j-- > 0)
-				ft_putchar('0');
-		}
-		if (d.point == 1 && ft_atoi(v.pre) == 0)
-			ft_nputstr(s2, 0);
-		else
-			ft_putstr(s2);
-	}
-	ft_strdel(&v.num);
-	ft_strdel(&v.pre);
-	ft_strdel(&s2);
-	return (v.a + n);
+		v->i = 0;
+	v->a = v->i;
+	x_cond(d, v, s2);
+	return (v->a + v->f);
 }

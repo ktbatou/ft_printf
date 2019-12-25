@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:52:34 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/22 13:20:24 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/24 19:19:14 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static long long int	ft_count(long long int n)
 	return (nb);
 }
 
-static char			*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
+static char				*ntoa(unsigned long long int nn, char *s, int n, int i)
 {
-	str[nb] = '\0';
-	while (nb > i)
+	s[n] = '\0';
+	while (n > i)
 	{
-		str[--nb] = '0' + (nn % 10);
+		s[--n] = '0' + (nn % 10);
 		nn /= 10;
 	}
-	return (str);
+	return (s);
 }
 
- char			*ft_ntoa(long long int n)
+char					*ft_ntoa(long long int n)
 {
 	unsigned long long int	nn;
 	int						i;
@@ -62,6 +62,6 @@ static char			*ft_nbtoa(unsigned long long int nn, char *str, int nb, int i)
 		str[++i] = '\0';
 	}
 	if (nn > 9)
-		str = ft_nbtoa(nn, str, nb, i);
+		str = ntoa(nn, str, nb, i);
 	return (str);
 }

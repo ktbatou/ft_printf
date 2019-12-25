@@ -6,13 +6,13 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:52:34 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/22 13:20:23 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/24 18:59:21 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned long long int		count(unsigned long long int n)
+unsigned long long int	count(unsigned long long int n)
 {
 	int nb;
 
@@ -27,18 +27,18 @@ static unsigned long long int		count(unsigned long long int n)
 	return (nb);
 }
 
-static char						*ft_iitoa(unsigned long long int nn, char *str, int nb, int i)
+char					*itoa(unsigned long long int j, char *s, int n, int i)
 {
-	str[nb] = '\0';
-	while (nb > i)
+	s[n] = '\0';
+	while (n > i)
 	{
-		str[--nb] = '0' + (nn % 10);
-		nn /= 10;
+		s[--n] = '0' + (j % 10);
+		j /= 10;
 	}
-	return (str);
+	return (s);
 }
 
-char						*ft_untoa(unsigned long long int n)
+char					*ft_untoa(unsigned long long int n)
 {
 	unsigned long long int	nn;
 	int						i;
@@ -55,6 +55,6 @@ char						*ft_untoa(unsigned long long int n)
 		str[++i] = '\0';
 	}
 	if (n > 9)
-		str = ft_iitoa(n, str, nb, i);
+		str = itoa(n, str, nb, i);
 	return (str);
 }

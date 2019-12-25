@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/24 15:26:47 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/25 17:44:58 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ typedef struct	s_unsigned_v
 	unsigned long long	ll;
 }				t_unsigned_v;
 
+void			xx_cond(t_detail d, t_valeur *v, char *str);
+t_detail		xx_flag(char *str, int n);
+char 			*xx_conv_flag(t_detail d, t_unsigned_v);
+void			xx_types(t_unsigned_v *v, t_detail d, va_list s2);
+void			x_cond(t_detail d, t_valeur *v, char *str);
+void			unsigned_intial(t_detail *d, t_unsigned_v *v);
+t_detail		x_flag(char *str, int n);
+char			*x_conv(t_unsigned_v v, t_detail det);
+void			x_types(va_list s2, t_unsigned_v *v, t_detail d);
 void			p_conv(t_detail d, t_valeur v, char *str);
 void			o_cond(t_detail d, t_valeur v, char *str);
 char			*conv_flag(t_unsigned_v v, t_detail d);
@@ -99,8 +108,8 @@ int				conv_xx(char *str, va_list s2, int n);
 int				print_p(t_valeur *v, char *str, t_detail d);
 int				conv_p(char *str, va_list s2, int n);
 int				flag_size(char *str, int n);
-int				get_details(char *s1, char *str, int i, t_unsigned_v vl);
-int				print_x(t_valeur v, char *s2, t_detail det);
+int				get_details(char *s1, int i, t_unsigned_v vl, t_detail d);
+int				print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det);
 int				conv_x(char *s1, va_list s2, int n);
 int				ft_check(char *str, int i, va_list op, t_valeur *v);
 int				ft_printf(char *str, ...);
