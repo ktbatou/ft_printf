@@ -6,12 +6,13 @@ int	main()
 	char str[100] = "kaoutar";
 	int a;
 	int i = 200;
-	printf("%.**8d",4,3,5);
+
 	//while (i-- >= 0)
 //	printf("-- %d --",ft_printf("%o\n", 444));
-//	ft_printf("%#llo%u%#lo", 18446744073709551615 , 65535, 4294967295);
-//	 printf("-- %d --",printf("%o\n", 444));
-//	printf ("\n%d ", printf("%.d", 55));
+		printf("%010x\n",0);
+		ft_printf("%010x\n",0);
+	// ft_printf("-- %d --",printf("%"));
+	//printf ("\n%d ", printf("%"));
 //	printf("\n%20p", &i);
 //	printf("\n%9.3d\n", 99);
 //	printf("%x\n", 5);

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/24 15:29:49 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:38:36 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		print_p(t_valeur *v, char *str, t_detail d)
 
 	n = ft_strlen(str) + 2;
 	v->a = 0;
-	if (d.point == 1 && ft_atoi(v->pre) > ft_strlen(str))
+	if (d.point == 1 && ft_atoi(v->pre) > (int)ft_strlen(str))
 		n -= 2;
 	v->n = n;
 	if (v->num)

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/25 12:54:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:38:52 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		conv_x(char *str, va_list s2, int n)
 {
-	char			*num;
 	t_detail		d;
 	t_unsigned_v	v;
 

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 17:33:54 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/25 17:43:47 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:37:27 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	xx_minus_print(t_detail d, t_valeur *v, char *str, char c)
 
 void	xx_zero_print(t_detail d, t_valeur *v, char *str, char c)
 {
+	d.l = 0;
+	c = 0;
 	ft_putstr("0X");
 	while (v->i-- > 0)
 		ft_putchar('0');
@@ -60,7 +62,7 @@ void	xx_cond(t_detail d, t_valeur *v, char *str)
 
 	c = ' ';
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-		 c = '0';
+		c = '0';
 	if (d.minus == 1)
 		xx_minus_print(d, v, str, c);
 	else if (d.zero == 1 && d.minus == 0 && d.hash == 1 && d.point == 0)

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:17:19 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/17 15:05:53 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:38:07 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			print_num(char *n, char *pre, char *str, t_detail d)
 	if (pre)
 		j = atoi(pre);
 	nn = ft_strlen(str);
-	if (d.point == 1 && (j < ft_strlen(str)))
+	if (d.point == 1 && (j < (int)ft_strlen(str)))
 		nn = j;
 	if (nn < i)
 		i -= nn;

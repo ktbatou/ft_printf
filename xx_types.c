@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 16:48:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/25 17:23:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:32:05 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_detail	xx_flag(char *str, int n)
 	return (det);
 }
 
-char	*xx_conv_flag(t_detail det, t_unsigned_v v)
+char		*xx_conv_flag(t_detail det, t_unsigned_v v)
 {
 	char	*num;
 
@@ -46,7 +46,7 @@ char	*xx_conv_flag(t_detail det, t_unsigned_v v)
 	return (num);
 }
 
-void	xx_types(t_unsigned_v *v, t_detail d, va_list s2)
+void		xx_types(t_unsigned_v *v, t_detail d, va_list s2)
 {
 	if (d.l == 1)
 	{

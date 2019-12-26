@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:52:34 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/24 18:59:21 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:42:06 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ char					*itoa(unsigned long long int j, char *s, int n, int i)
 
 char					*ft_untoa(unsigned long long int n)
 {
-	unsigned long long int	nn;
-	int						i;
 	unsigned long long int	nb;
+	int						i;
 	char					*str;
 
 	i = 0;

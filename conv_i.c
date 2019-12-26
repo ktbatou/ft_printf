@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/23 13:32:01 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:56:00 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	v.j = 0;
 	if (v.num)
 		v.i = ft_atoi(v.num);
-	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > ft_strlen(str)))
+	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > n))
 		v.n--;
 	if (v.num)
 		v.i = ft_atoi(v.num);

@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/23 17:08:14 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:40:00 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int		detail_o(char *str, int n, t_unsigned_v vl, t_detail d)
 
 int		conv_o(char *str, va_list s2, int n)
 {
-	char			*num;
 	t_detail		det;
 	t_unsigned_v	v;
 
