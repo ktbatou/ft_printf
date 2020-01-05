@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:55:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 14:55:43 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,46 +62,6 @@ void	zero_print(t_valeur v, char *str, char c)
 	while (v.i-- > 0)
 		ft_putchar(c);
 	ft_putstr(str);
-}
-
-void	negative_print(t_detail d, t_valeur v, char *str, char c)
-{
-	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-	{
-		ft_putchar('-');
-		if (d.point == 1)
-		{
-			while (v.j-- > 0)
-				ft_putchar('0');
-		}
-		while (v.i-- > 0)
-			ft_putchar(c);
-		ft_putstr(str + 1);
-	}
-	else if (d.minus == 1)
-	{
-		ft_putchar('-');
-		if (d.point == 1)
-		{
-			while (v.j-- > 0)
-				ft_putchar('0');
-		}
-		ft_putstr(str + 1);
-		while (v.i-- > 0)
-			ft_putchar(c);
-	}
-	else
-	{
-		while (v.i-- > 0)
-			ft_putchar(c);
-		ft_putchar('-');
-		if (d.point == 1)
-		{
-			while (v.j-- > 0)
-				ft_putchar('0');
-		}
-		ft_putstr(str + 1);
-	}
 }
 
 void	cond(t_detail d, t_valeur v, t_valeur vl, char *s)

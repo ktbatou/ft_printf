@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_o.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:40:00 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/01/05 15:24:58 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int		o_checker(char *str, int n, t_detail *detail, t_valeur *v)
 	int i;
 
 	i = 0;
-	if (str[n] == '-')
-		detail->minus = 1;
-	if (str[n] == '#' && v->a == 1)
-		detail->hash = 1;
+	detail->minus = str[n] == '-' ? 1 : detail->minus;
+	if (str[n] == '#')
+		detail->hash = 2;
+	detail->hash = (detail->hash == 2 && v->a == 1) ? 1 : detail->hash;
 	if (str[n] >= '0' && str[n] <= '9')
 	{
 		if (!v->num)
@@ -72,11 +72,11 @@ int		o_checker(char *str, int n, t_detail *detail, t_valeur *v)
 		v->flag = 1;
 		v->num[v->j++] = str[n];
 	}
-	if (str[n] == '.')
+	if (str[n] == '.' && (detail->point = 1))
 	{
 		v->pre = ft_strnew(pre_size(str, n + 1));
 		i = prec(str, n + 1, *v);
-		detail->point = 1;
+		detail->hash = (detail->hash == 2 && v->a == 0) ? 1 : detail->hash;
 	}
 	return (i);
 }

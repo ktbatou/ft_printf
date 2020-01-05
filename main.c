@@ -9,8 +9,10 @@ int	main()
 
 	//while (i-- >= 0)
 //	printf("-- %d --",ft_printf("%o\n", 444));
-		printf("%010x\n",0);
-		ft_printf("%010x\n",0);
+	//	printf("%010x\n",0);
+		printf("%d\n",ft_printf("%%\n"));
+
+		printf("%d\n",printf("%%\n"));
 	// ft_printf("-- %d --",printf("%"));
 	//printf ("\n%d ", printf("%"));
 //	printf("\n%20p", &i);

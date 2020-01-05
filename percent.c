@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 13:48:41 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:40:30 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/27 12:57:59 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int		percent(char *str, va_list s2, int n)
 {
 	s2 = 0;
 	detail_prc(str, n);
-	return (0);
+	return (1);
 }

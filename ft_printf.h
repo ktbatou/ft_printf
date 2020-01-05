@@ -6,7 +6,7 @@
 /*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/25 17:44:58 by ktbatou          ###   ########.fr       */
+/*   Updated: 2019/12/26 14:49:51 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_unsigned_v
 	unsigned long long	ll;
 }				t_unsigned_v;
 
+void			negative_print(t_detail d, t_valeur v, char *str, char c);
 void			xx_cond(t_detail d, t_valeur *v, char *str);
 t_detail		xx_flag(char *str, int n);
 char 			*xx_conv_flag(t_detail d, t_unsigned_v);
