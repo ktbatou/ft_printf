@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:41:09 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/01/21 15:33:16 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "./include/ft_printf.h"
 
 int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 {
@@ -27,14 +27,16 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 		v.i = ft_atoi(v.num);
 	if (v.pre)
 		n = pre_vlr(&v, vl, n);
+	
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
-	if (d.plus == 1)
-		v.i--;
 	cond(d, v, vl, str);
+	if (d.plus == 1)
+		v.i++;	
 	return (v.i + n);
+	
 }
 
 int			string_size(char *str, int n)
@@ -74,7 +76,7 @@ int			checker_d(t_detail *d, t_valeur *v, char *s, int n)
 	if (s[n] == '.')
 	{
 		v->pre = ft_strnew(pre_size(s, n + 1));
-		i = prec(s, n + 1, *v);
+		i = pre_size(s, n + 1) > 0 ? prec(s, n + 1, *v) : 0;
 		d->point = 1;
 	}
 	return (i);

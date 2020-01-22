@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_pre.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 16:36:24 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/23 13:59:41 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/01/20 21:58:40 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int		prec(char *str, int n, t_valeur v)
 int		pre_vlr(t_valeur *v, t_valeur vl, int n)
 {
 	v->j = ft_atoi(v->pre);
+	if (v->j <= 0)
+		return (n);
 	if (v->j > n)
 	{
 		n = v->j;

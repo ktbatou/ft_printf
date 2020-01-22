@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "./src/include/ft_printf.h"
 #include <limits.h>
 char    *ft_sum(char *num1, char *num2);
 char		*ft_sumx(char *nbr1, char *nbr2);
@@ -15,8 +15,10 @@ int	main()
 //	printf("-- %d --",ft_printf("%o\n", 444));
 	//	printf("%010x\n",0);
 		//printf("%d\n",ft_printf("%%\n"))
-	printf("%d\n",ft_printf("%010.2d ", 1));
-	printf("%d\n",printf("%010.2d ", 1));
+		//ft_printf("|%.2d|\n",-11);
+		//printf("|%.2d|\n", -11);
+	ft_printf("%d\n",ft_printf("|%+18d|",2147483647));
+	printf("%d\n",printf("|%+18d|",2147483647));
 	//printf("%%55\n");
 	// ft_printf("-- %d --",printf("%"));
 	//printf ("\n%d ", printf("%"));

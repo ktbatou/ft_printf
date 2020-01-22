@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d.minus.c                                          :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 14:55:43 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/01/21 15:13:56 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	minus_print(t_detail d, t_valeur v, char *str, char c)
 		ft_putchar(' ');
 		v.i--;
 	}
-	if (d.plus == 1)
+	if (d.plus == 1 && (--v.i))
 		ft_putchar('+');
 	if (d.point == 1)
 	{
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
-		ft_nputstr(str, 0);
-	else
+	//if (d.point == 1 && ft_atoi(v.pre) == 0)
+		//ft_nputstr(str, 0);
+	//else
 		ft_putstr(str);
 	while (v.i-- > 0)
 		ft_putchar(c);
@@ -36,6 +36,9 @@ void	minus_print(t_detail d, t_valeur v, char *str, char c)
 
 void	normal_print(t_detail d, t_valeur v, char *str, char c)
 {
+
+	if (d.plus == 1)
+		v.i--;
 	if (d.space == 1 && d.plus == 0)
 	{
 		ft_putchar(' ');
@@ -50,14 +53,15 @@ void	normal_print(t_detail d, t_valeur v, char *str, char c)
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
-		ft_nputstr(str, 0);
-	else
+	//if (d.point == 1 && ft_atoi(v.pre) == 0)
+		//ft_nputstr(str, 0);
+	//else
 		ft_putstr(str);
 }
 
 void	zero_print(t_valeur v, char *str, char c)
 {
+	v.i--;
 	ft_putchar('+');
 	while (v.i-- > 0)
 		ft_putchar(c);
@@ -72,7 +76,7 @@ void	cond(t_detail d, t_valeur v, t_valeur vl, char *s)
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if ((vl.j == 0 && d.zero == 1 && d.minus == 0)
-			|| (vl.j == 0 && v.j > 0 && d.point))
+			|| (vl.j == 0 && v.j > 0 && d.point == 1))
 		negative_print(d, v, s, c);
 	else if (d.minus == 1)
 		minus_print(d, v, s, c);
