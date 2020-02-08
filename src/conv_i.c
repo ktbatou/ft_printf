@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_i.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:56:00 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/07 18:05:00 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 		v.i -= n;
 	else
 		v.i = 0;
-	if (d.plus == 1)
-		v.i--;
 	cond(d, v, t, str);
 	return (v.i + n);
 }

@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/21 15:33:16 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 12:11:06 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 	str = type_conv(vl, det);
 	n = ft_strlen(str);
 	v.n = n;
-	if ((vl.j == 0 && d.point == 1 && ft_atoi(v.pre) > (int)ft_strlen(str)))
+	if ((vl.j == 0 && d.point == 1 && ft_atoi(v.pre) >= (int)ft_strlen(str)))
 		v.n--;
-	if (v.num)
+	if (v.num && (v.f = ft_atoi(v.num)))
 		v.i = ft_atoi(v.num);
 	if (v.pre)
-		n = pre_vlr(&v, vl, n);
-	
+		n = pre_vlr(&v, vl, n, str);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
 	cond(d, v, vl, str);
-	if (d.plus == 1)
-		v.i++;	
+	if ((d.plus == 1 && n >= v.f) ||
+	(d.space == 1 && n >= v.f))
+		return (v.i + n + 1);
 	return (v.i + n);
 	
 }

@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 16:36:24 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/20 21:58:40 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 12:15:09 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ int		prec(char *str, int n, t_valeur v)
 	return (i);
 }
 
-int		pre_vlr(t_valeur *v, t_valeur vl, int n)
+int		pre_vlr(t_valeur *v, t_valeur vl, int n, char *str)
 {
 	v->j = ft_atoi(v->pre);
+	if (ft_atoi(str) == 0 && v->j == 0)
+		return (0);
 	if (v->j <= 0)
 		return (n);
-	if (v->j > n)
+	if (v->j >= n)
 	{
 		n = v->j;
 		if (vl.j == 0)

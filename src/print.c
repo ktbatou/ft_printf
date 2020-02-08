@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:16:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/21 15:13:56 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 12:04:17 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	minus_print(t_detail d, t_valeur v, char *str, char c)
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	//if (d.point == 1 && ft_atoi(v.pre) == 0)
-		//ft_nputstr(str, 0);
-	//else
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
+		ft_nputstr(str, 0);
+	else
 		ft_putstr(str);
 	while (v.i-- > 0)
 		ft_putchar(c);
@@ -46,16 +46,16 @@ void	normal_print(t_detail d, t_valeur v, char *str, char c)
 	}
 	while (v.i-- > 0)
 		ft_putchar(c);
-	if (d.plus == 1)
+	if (d.plus == 1 && (--v.i))
 		ft_putchar('+');
 	if (d.point == 1)
 	{
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	//if (d.point == 1 && ft_atoi(v.pre) == 0)
-		//ft_nputstr(str, 0);
-	//else
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
+		ft_nputstr(str, 0);
+	else
 		ft_putstr(str);
 }
 

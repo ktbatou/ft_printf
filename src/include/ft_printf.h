@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/18 20:59:14 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 12:12:46 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			o_cond(t_detail d, t_valeur v, char *str);
 char			*conv_flag(t_unsigned_v v, t_detail d);
 void			o_types(t_detail *det, t_unsigned_v *v, va_list s2);
 t_detail		flag_det(char *str, int n);
-int				pre_vlr(t_valeur *v, t_valeur vl, int n);
+int				pre_vlr(t_valeur *v, t_valeur vl, int n, char *str);
 void			intial(t_detail *d, t_valeur *v);
 void			cond_u(t_detail d, t_valeur v, char *str);
 t_detail		flags(char *str, int n);
