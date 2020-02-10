@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 12:11:06 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 13:51:29 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 	(d.space == 1 && n >= v.f))
 		return (v.i + n + 1);
 	return (v.i + n);
-	
 }
 
 int			string_size(char *str, int n)

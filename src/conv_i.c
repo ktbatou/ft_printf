@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/07 18:05:00 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/09 17:38:36 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	v.n = n;
 	v.i = 0;
 	v.j = 0;
-	if (v.num)
+	if (v.num && (v.f = ft_atoi(v.num)))
 		v.i = ft_atoi(v.num);
 	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > n))
 		v.n--;
-	if (v.num)
-		v.i = ft_atoi(v.num);
 	if (v.pre)
-		n = pre_vlr(&v, t, n);
+		n = pre_vlr(&v, t, n, str);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
 	cond(d, v, t, str);
+	if ((d.plus == 1 && n >= v.f) ||
+	(d.space == 1 && n >= v.f))
+		return (v.i + n + 1);
 	return (v.i + n);
 }
 

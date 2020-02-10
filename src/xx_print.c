@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xx_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 17:33:54 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:37:27 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 15:38:45 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	xx_minus_print(t_detail d, t_valeur *v, char *str, char c)
 		while (v->j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v->pre) == 0)
+	if (d.point == 1 && ft_atoi(v->pre) == 0 && v->a == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
@@ -50,17 +50,18 @@ void	xx_normal_print(t_detail d, t_valeur *v, char *str, char c)
 		while (v->j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v->pre) == 0)
+	if (d.point == 1 && ft_atoi(v->pre) == 0 && v->a == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
 }
 
-void	xx_cond(t_detail d, t_valeur *v, char *str)
+void	xx_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl)
 {
 	char	c;
 
 	c = ' ';
+	v->a = vl.signe;
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
 		c = '0';
 	if (d.minus == 1)

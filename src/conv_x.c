@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:38:52 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 15:01:41 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det)
 	{
 		v->j = ft_atoi(v->pre);
 		v->f = v->j > v->f ? v->j : v->f;
-		if (v->j == 0)
+		if (v->j == 0 && vl.signe == 0)
 			v->f = 0;
 		v->j -= v->n;
 	}
@@ -90,7 +90,7 @@ int		print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det)
 	}
 	else
 		v->i = 0;
-	v->a = v->i;
-	x_cond(d, v, s2);
-	return (v->a + v->f);
+	v->rest = v->i;
+	x_cond(d, v, s2, vl);
+	return (v->rest + v->f);
 }

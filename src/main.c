@@ -17,8 +17,8 @@ int	main()
 		//printf("%d\n",ft_printf("%%\n"))
 		//ft_printf("|%.2d|\n",-11);
 		//printf("|%.2d|\n", -11);
-	printf("%d\n",ft_printf("|%10.0d|",0));
-	printf("%d\n",printf("|%10.0d|",0));
+	printf("  %d\n",ft_printf("|%#0.22o|", ULLONG_MAX));
+	printf("  %d\n",printf("|%#0.22o|", ULLONG_MAX));
 	//printf("%%55\n");
 	// ft_printf("-- %d --",printf("%"));
 	//printf ("\n%d ", printf("%"));

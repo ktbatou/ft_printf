@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_u.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/20 18:20:52 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 14:48:41 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int			print_u(char *str, t_valeur v, t_detail d)
 	if (v.pre)
 	{
 		v.j = ft_atoi(v.pre);
-		if (v.j > n)
-			n = v.j;
-		if (v.j == 0)
+		if (v.j > n && v.j > 0)
+			n = v.j;				
+		if (v.j == 0 && ft_atoi(str) == 0)
 			n = 0;
 		v.j -= v.n;
 	}
@@ -35,9 +35,8 @@ int			print_u(char *str, t_valeur v, t_detail d)
 		v.i -= n;
 	else
 		v.i = 0;
-	v.a = v.i;
 	cond_u(d, v, str);
-	return (v.a + n);
+	return (v.i + n);
 }
 
 int			u_size(char *str, int n)

@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 12:12:46 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 15:39:15 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ typedef struct	s_unsigned_v
 
 void			initial_valeur(t_valeur *v);
 void			negative_print(t_detail d, t_valeur v, char *str, char c);
-void			xx_cond(t_detail d, t_valeur *v, char *str);
+void			xx_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
 t_detail		xx_flag(char *str, int n);
 char 			*xx_conv_flag(t_detail d, t_unsigned_v);
 void			xx_types(t_unsigned_v *v, t_detail d, va_list s2);
-void			x_cond(t_detail d, t_valeur *v, char *str);
+void			x_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
 void			unsigned_intial(t_detail *d, t_unsigned_v *v);
 t_detail		x_flag(char *str, int n);
 char			*x_conv(t_unsigned_v v, t_detail det);

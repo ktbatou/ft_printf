@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_print.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:36:51 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/23 16:52:37 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 14:49:17 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	minus_o(t_detail d, t_valeur v, char *str, char c)
 	if ((d.hash == 1 && (v.n > v.f)) ||
 			(d.hash == 1 && v.f == 0))
 		ft_putchar('0');
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
@@ -42,7 +42,7 @@ void	normal_o(t_detail d, t_valeur v, char *str, char c)
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);

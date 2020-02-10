@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_print.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 13:59:06 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/20 18:20:21 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/08 14:29:02 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	minus_u(t_detail d, t_valeur v, char *str, char c)
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
@@ -36,7 +36,7 @@ void	u_normal(t_detail d, t_valeur v, char *str, char c)
 		while (v.j-- > 0)
 			ft_putchar('0');
 	}
-	if (d.point == 1 && ft_atoi(v.pre) == 0)
+	if (d.point == 1 && ft_atoi(v.pre) == 0 && ft_atoi(str) == 0)
 		ft_nputstr(str, 0);
 	else
 		ft_putstr(str);
