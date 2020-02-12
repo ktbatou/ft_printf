@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 15:39:15 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:58:26 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_valeur
 	int				f;
 	int				a;
 	int				n;
+	int				signe;
 	int				flag;
 	char			*num;
 	char			*pre;
@@ -65,39 +66,40 @@ typedef struct	s_unsigned_v
 	unsigned short int	h;
 	unsigned long int	l;
 	unsigned long long	ll;
+	unsigned long long	rest;
+
 }				t_unsigned_v;
 
 void			initial_valeur(t_valeur *v);
-void			negative_print(t_detail d, t_valeur v, char *str, char c);
-void			xx_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
+int				xx_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
 t_detail		xx_flag(char *str, int n);
-char 			*xx_conv_flag(t_detail d, t_unsigned_v);
+char			*xx_conv_flag(t_detail d, t_unsigned_v v);
 void			xx_types(t_unsigned_v *v, t_detail d, va_list s2);
-void			x_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
+int				x_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
 void			unsigned_intial(t_detail *d, t_unsigned_v *v);
 t_detail		x_flag(char *str, int n);
 char			*x_conv(t_unsigned_v v, t_detail det);
 void			x_types(va_list s2, t_unsigned_v *v, t_detail d);
-void			p_conv(t_detail d, t_valeur v, char *str);
-void			o_cond(t_detail d, t_valeur v, char *str);
+int				p_conv(t_detail d, t_valeur *v, char *str);
+int				o_cond(t_detail d, t_valeur *v, char *str);
 char			*conv_flag(t_unsigned_v v, t_detail d);
 void			o_types(t_detail *det, t_unsigned_v *v, va_list s2);
 t_detail		flag_det(char *str, int n);
-int				pre_vlr(t_valeur *v, t_valeur vl, int n, char *str);
+int				pre_vlr(t_valeur *v, t_valeur vl, int n);
 void			intial(t_detail *d, t_valeur *v);
-void			cond_u(t_detail d, t_valeur v, char *str);
+int				cond_u(t_detail d, t_valeur *v, char *str);
 t_detail		flags(char *str, int n);
 void			u_types(t_detail d, t_unsigned_v *v, char **num, va_list s2);
-t_detail    	type_flag(char *str, int n);
+t_detail		type_flag(char *str, int n);
 t_detail		flag_detail(char *str, int n);
 char			*type_conv(t_valeur v, t_detail det);
-void    		types(va_list s2, t_detail detail , t_valeur *vlr);
+void			types(va_list s2, t_detail detail, t_valeur *vlr);
 void			cond_s(t_detail d, char *str, int i, int j);
-void			negative_print(t_detail d, t_valeur v, char *str, char c);
-void			cond(t_detail d, t_valeur v, t_valeur vl, char *s);
-void			zero_print(t_valeur v, char *str, char c);
-void			minus_print(t_detail d, t_valeur v, char *str, char c);
-void			normal_print(t_detail d, t_valeur v, char *str, char c);
+int				negative_print(t_detail d, t_valeur *v, char *str, char c);
+int				cond(t_detail d, t_valeur *v, t_valeur vl, char *s);
+int				zero_print(t_valeur *v, char *str, char c);
+int				minus_print(t_detail d, t_valeur *v, char *str, char c);
+int				normal_print(t_detail d, t_valeur *v, char *str, char c);
 int				pre_size(char *str, int n);
 int				prec(char *str, int n, t_valeur v);
 void			ft_nputstr(char const *s, int n);
@@ -126,5 +128,8 @@ int				checker(char *str, va_list ap, char *s);
 int				get_detail(char *str, int *de);
 int				print_num(char *n, char *pre, char *str, t_detail d);
 void			print_nb(char *nb, char c, int minus);
+void			n_putchar(char c, t_valeur *v);
+void			n_putstr(char const *s, t_valeur *v);
+void			get_signe(t_detail detail, t_valeur *vlr);
 
 #endif

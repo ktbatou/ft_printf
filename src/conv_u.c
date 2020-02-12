@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:51:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 14:48:41 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:36:53 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			print_u(char *str, t_valeur v, t_detail d)
 	{
 		v.j = ft_atoi(v.pre);
 		if (v.j > n && v.j > 0)
-			n = v.j;				
+			n = v.j;
 		if (v.j == 0 && ft_atoi(str) == 0)
 			n = 0;
 		v.j -= v.n;
@@ -35,8 +35,8 @@ int			print_u(char *str, t_valeur v, t_detail d)
 		v.i -= n;
 	else
 		v.i = 0;
-	cond_u(d, v, str);
-	return (v.i + n);
+	v.rest = cond_u(d, &v, str);
+	return (v.rest);
 }
 
 int			u_size(char *str, int n)
@@ -83,13 +83,7 @@ int			u_detail(char *num, char *str, int n)
 	t_detail detail;
 	t_valeur v;
 
-	detail.minus = 0;
-	detail.zero = 0;
-	detail.point = 0;
-	v.flag = 0;
-	v.i = 0;
-	v.pre = 0;
-	v.num = 0;
+	intial(&detail, &v);
 	while (str[n] != 'u')
 	{
 		n += u_check(str, &detail, &v, n);
@@ -104,6 +98,7 @@ int			conv_u(char *str, va_list s2, int n)
 	t_detail		d;
 	char			*num;
 
+	intial(&d, NULL);
 	d = flags(str, n);
 	u_types(d, &v, &num, s2);
 	return (u_detail(num, str, n));

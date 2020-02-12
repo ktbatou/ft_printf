@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:12:16 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/10 13:26:48 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/11 19:09:29 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		print_o(t_valeur *v, t_detail d, t_unsigned_v vl, t_detail det)
 	str = conv_flag(vl, det);
 	n = ft_strlen(str);
 	v->n = n;
-	if (v->num && (v->rest = ft_atoi(v->num)))
+	if (v->num)
 		v->i = ft_atoi(v->num);
 	if (v->pre)
 	{
@@ -36,14 +36,8 @@ int		print_o(t_valeur *v, t_detail d, t_unsigned_v vl, t_detail det)
 		v->i -= n;
 	else
 		v->i = 0;
-	o_cond(d, *v, str);
-	printf("{v->n == %d} \n", v->n);
-	printf("{v->f == %d} \n", v->f);
-	if ((d.hash == 1 && d.point == 1 && v->f == 0 && v->rest == 0) ||
-		(d.hash == 1 && d.point == 1 && vl.signe == 1 && n >= v->rest && v->n > v->f) ||
-		(d.hash == 1 && d.point == 0 &&  n >= v->rest))
-		return (v->i + n + 1);
-	return (v->i + n);
+	v->rest = o_cond(d, v, str);
+	return (v->rest);
 }
 
 int		num_size(char *str, int n)

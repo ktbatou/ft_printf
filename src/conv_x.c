@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:44:56 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 15:01:41 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/11 18:21:10 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int		print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det)
 	}
 	else
 		v->i = 0;
-	v->rest = v->i;
-	x_cond(d, v, s2, vl);
-	return (v->rest + v->f);
+	v->rest = x_cond(d, v, s2, vl);
+	return (v->rest);
 }

@@ -6,12 +6,11 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:16:30 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/20 19:12:51 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:23:08 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int		ft_size(char *str, int i)
 {

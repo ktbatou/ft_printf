@@ -6,57 +6,61 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 14:39:49 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/20 20:53:25 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:45:06 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	zero(t_detail d, t_valeur v, char *str, char c)
+int	zero(t_detail d, t_valeur *v, char *str, char c)
 {
-	ft_putchar('-');
+	n_putchar('-', v);
 	if (d.point == 1)
 	{
-		while (v.j-- > 0)
-			ft_putchar('0');
+		while (v->j-- > 0)
+			n_putchar('0', v);
 	}
-	while (v.i-- > 0)
-		ft_putchar(c);
-	ft_putstr(str + 1);
+	while (v->i-- > 0)
+		n_putchar(c, v);
+	n_putstr(str + 1, v);
+	return (v->rest);
 }
 
-void	print_minus(t_detail d, t_valeur v, char *str, char c)
+int	print_minus(t_detail d, t_valeur *v, char *str, char c)
 {
-	ft_putchar('-');
+	n_putchar('-', v);
 	if (d.point == 1)
 	{
-		while (v.j-- > 0)
-			ft_putchar('0');
+		while (v->j-- > 0)
+			n_putchar('0', v);
 	}
-	ft_putstr(str + 1);
-	while (v.i-- > 0)
-		ft_putchar(c);
+	n_putstr(str + 1, v);
+	while (v->i-- > 0)
+		n_putchar(c, v);
+	return (v->rest);
 }
 
-void	print_negative(t_detail d, t_valeur v, char *str, char c)
+int	print_negative(t_detail d, t_valeur *v, char *str, char c)
 {
-	while (v.i-- > 0)
-		ft_putchar(c);
-	ft_putchar('-');
+	while (v->i-- > 0)
+		n_putchar(c, v);
+	n_putchar('-', v);
 	if (d.point == 1)
 	{
-		while (v.j-- > 0)
-			ft_putchar('0');
+		while (v->j-- > 0)
+			n_putchar('0', v);
 	}
-	ft_putstr(str + 1);
+	n_putstr(str + 1, v);
+	return (v->rest);
 }
 
-void	negative_print(t_detail d, t_valeur v, char *str, char c)
+int	negative_print(t_detail d, t_valeur *v, char *str, char c)
 {
 	if (d.zero == 1 && d.minus == 0 && d.point == 0)
-		zero(d, v, str, c);
+		v->rest = zero(d, v, str, c);
 	else if (d.minus == 1)
-		print_minus(d, v, str, c);
+		v->rest = print_minus(d, v, str, c);
 	else
-		print_negative(d, v, str, c);
+		v->rest = print_negative(d, v, str, c);
+	return (v->rest);
 }

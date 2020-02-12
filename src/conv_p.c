@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_p.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:24:58 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/26 10:38:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/11 19:08:22 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int		print_p(t_valeur *v, char *str, t_detail d)
 	else
 		v->i = 0;
 	v->a = v->i;
-	p_conv(d, *v, str);
-	return (v->a + n);
+	v->rest = p_conv(d, v, str);
+	return (v->rest);
 }
 
 int		size_p(unsigned long long int nb)

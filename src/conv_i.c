@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:31:50 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/09 17:38:36 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:01:05 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,20 @@ int			print_i(t_valeur v, t_valeur t, t_detail d, t_detail det)
 	v.n = n;
 	v.i = 0;
 	v.j = 0;
-	if (v.num && (v.f = ft_atoi(v.num)))
+	if (v.num)
 		v.i = ft_atoi(v.num);
 	if ((t.j == 0 && d.point == 1 && ft_atoi(v.pre) > n))
 		v.n--;
 	if (v.pre)
-		n = pre_vlr(&v, t, n, str);
+		n = pre_vlr(&v, t, n);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
-	cond(d, v, t, str);
-	if ((d.plus == 1 && n >= v.f) ||
-	(d.space == 1 && n >= v.f))
-		return (v.i + n + 1);
-	return (v.i + n);
+	if (d.plus == 1)
+		v.i--;
+	v.rest = cond(d, &v, t, str);
+	return (v.rest);
 }
 
 int			i_size(char *str, int n)
@@ -90,6 +89,7 @@ int			i_detail(t_valeur val, t_detail d, char *str, int n)
 	intial(&detail, &v);
 	v.num = ft_strnew(i_size(str, n));
 	v.n = val.j;
+	v.signe = val.signe;
 	while (str[n] != 'i')
 	{
 		n += i_check(&detail, &v, str, n);
@@ -106,5 +106,6 @@ int			conv_i(char *str, va_list s2, int n)
 	det = type_flag(str, n);
 	v.j = 0;
 	types(s2, det, &v);
+	get_signe(det, &v);
 	return (i_detail(v, det, str, n));
 }

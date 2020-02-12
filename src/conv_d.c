@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:14:03 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/08 13:51:29 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:27:01 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ int			print_d(t_valeur v, t_valeur vl, t_detail d, t_detail det)
 	if (v.num && (v.f = ft_atoi(v.num)))
 		v.i = ft_atoi(v.num);
 	if (v.pre)
-		n = pre_vlr(&v, vl, n, str);
+		n = pre_vlr(&v, vl, n);
 	if (v.i > n)
 		v.i -= n;
 	else
 		v.i = 0;
-	cond(d, v, vl, str);
-	if ((d.plus == 1 && n >= v.f) ||
-	(d.space == 1 && n >= v.f))
-		return (v.i + n + 1);
-	return (v.i + n);
+	if (d.plus == 1)
+		v.i--;
+	v.rest = cond(d, &v, vl, str);
+	return (v.rest);
 }
 
 int			string_size(char *str, int n)
@@ -89,6 +88,7 @@ int			d_detail(t_valeur valeur, char *str, int n, t_detail d)
 	intial(&detail, &v);
 	v.i = string_size(str, n);
 	v.n = valeur.j;
+	v.signe = valeur.signe;
 	while (str[n] != 'd')
 	{
 		n += checker_d(&detail, &v, str, n);
@@ -105,5 +105,6 @@ int			conv_d(char *str, va_list s2, int n)
 	intial(&detail, &vlr);
 	detail = flag_detail(str, n);
 	types(s2, detail, &vlr);
+	get_signe(detail, &vlr);
 	return (d_detail(vlr, str, n, detail));
 }

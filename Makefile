@@ -6,7 +6,7 @@
 #    By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
-#    Updated: 2020/01/20 20:13:53 by ktbatou          ###   ########.fr        #
+#    Updated: 2020/02/10 15:50:15 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ OBJ = ./src/print.o		./src/print_s.o		./src/xx_print.o		./src/negative_d_i.o \
 	./src/full_pre.o	./src/conv_s.o 		./src/conv_c.o		./src/ft_printf.o	./src/conv_p.o \
 	./src/conv_x.o 		./src/conv_xx.o 	./src/conv_i.o		./src/conv_u.o		./src/ft_utoa.o \
 	./src/conv_o.o 		./src/conv_d.o		./src/percent.o		./src/ft_ntoa.o \
-	./src/ft_untoa.o	./src/ft_itoa_base.o 	./src/ft_nputstr.o $(LIB)
-
+	./src/ft_untoa.o	./src/ft_itoa_base.o 	./src/ft_nputstr.o	./src/n_putstr.o  \
+	./src/n_putchar.o  $(LIB)
 HDR = -I ./src/include -I ./src/libft
 
 LIBFT = ./src/libft/libft.a

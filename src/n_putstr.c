@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nputstr.c                                       :+:      :+:    :+:   */
+/*   n_putstr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 14:10:10 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/12 14:36:09 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:38:40 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_nputstr(char const *s, int n)
+void	n_putstr(char const *s, t_valeur *v)
 {
 	int i;
 
 	if (!s)
 		return ;
 	i = 0;
-	while (s[i] && i < n)
+	while (s[i] && s[i] != '\0')
 	{
 		write(1, &s[i], 1);
 		i++;
+		v->rest++;
 	}
 }

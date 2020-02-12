@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_types.c                                          :+:      :+:    :+:   */
+/*   int_types.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktbatou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:49:26 by ktbatou           #+#    #+#             */
-/*   Updated: 2019/12/21 16:09:29 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:45:38 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,35 @@ void		types(va_list s2, t_detail detail, t_valeur *vlr)
 	{
 		if ((vlr->i = va_arg(s2, int)) >= 0)
 			vlr->j = 1;
+	}
+}
+
+void		get_signe(t_detail detail, t_valeur *vlr)
+{
+	if (detail.l == 1)
+	{
+		if (vlr->l != 0)
+			vlr->signe = 1;
+	}
+	else if (detail.l == 2)
+	{
+		if (vlr->ll != 0)
+			vlr->signe = 1;
+	}
+	else if (detail.h == 1)
+	{
+		if (vlr->h != 0)
+			vlr->signe = 1;
+	}
+	else if (detail.h == 2)
+	{
+		if (vlr->hh != 0)
+			vlr->signe = 1;
+	}
+	else
+	{
+		if (vlr->i != 0)
+			vlr->signe = 1;
 	}
 }
 
