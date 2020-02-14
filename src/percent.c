@@ -6,18 +6,18 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 13:48:41 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/01/20 20:22:05 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/02/14 10:58:25 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_prc(char *num, t_detail d)
+int		print_prc(t_valeur v, t_detail d)
 {
 	int		i;
 	char	c;
 
-	i = ft_atoi(num);
+	i = ft_atoi(v.num);
 	c = ' ';
 	if (i >= 1)
 		i--;
@@ -29,14 +29,15 @@ void	print_prc(char *num, t_detail d)
 	{
 		ft_putchar('%');
 		while (i-- > 0)
-			ft_putchar(c);
+			n_putchar(c, &v);
 	}
 	else
 	{
 		while (i-- > 0)
-			ft_putchar(c);
-		ft_putchar('%');
+			n_putchar(c, &v);
+		n_putchar('%', &v);
 	}
+	return (v.rest);
 }
 
 int		cnt(char *str, int n)
@@ -53,15 +54,12 @@ int		cnt(char *str, int n)
 	return (i);
 }
 
-void	detail_prc(char *str, int n)
+int		detail_prc(char *str, int n)
 {
 	t_detail detail;
 	t_valeur v;
 
-	v.flag = 0;
-	v.j = 0;
-	detail.minus = 0;
-	detail.zero = 0;
+	intial(&detail, &v);
 	v.num = ft_strnew(cnt(str, n));
 	while (str[n] != '%')
 	{
@@ -76,12 +74,11 @@ void	detail_prc(char *str, int n)
 		}
 		n++;
 	}
-	print_prc(v.num, detail);
+	return (print_prc(v, detail));
 }
 
 int		percent(char *str, va_list s2, int n)
 {
 	s2 = 0;
-	detail_prc(str, n);
-	return (1);
+	return (detail_prc(str, n));
 }
