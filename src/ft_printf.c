@@ -14,8 +14,8 @@
 
 const t_data g_struct =
 {
-	{"csxpXdiuo%"},
-	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx,
+	{"fcsxpXdiuo%"},
+	{&conv_f, &conv_c, &conv_s, &conv_x, &conv_p, &conv_xx,
 		&conv_d, &conv_i, &conv_u, &conv_o, &percent}
 };
 
@@ -58,7 +58,7 @@ int		ft_check(char *str, int n, va_list op, t_valeur *v)
 	while (str[n])
 	{
 		v->j = 0;
-		while (v->j < 10)
+		while (v->j < 11)
 		{
 			if (data.flags[v->j] == str[n])
 			{
