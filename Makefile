@@ -24,25 +24,28 @@ LIB = src/libft/ft_atoi.o	src/libft/ft_bzero.o   src/libft/ft_isalnum.o   src/li
 	src/libft/ft_strjoin.o	src/libft/ft_strlcat.o	src/libft/ft_strmap.o	src/libft/ft_strncpy.o\
 	src/libft/ft_strmapi.o	src/libft/ft_strncat.o	src/libft/ft_strncmp.o	src/libft/ft_strnequ.o\
 	src/libft/ft_strnstr.o	src/libft/ft_strrchr.o	src/libft/ft_strsplit.o	src/libft/ft_strstr.o\
-	src/libft/ft_strsub.o	src/libft/ft_strtrim.o	src/libft/ft_tolower.o	src/libft/ft_toupper.o
+	src/libft/ft_strsub.o	src/libft/ft_strtrim.o	src/libft/ft_tolower.o	src/libft/ft_toupper.o\
+	src/libft/ft_strrev.o
 
 OBJ = ./src/print.o		./src/print_s.o		./src/xx_print.o		./src/negative_d_i.o \
 	./src/o_print.o		./src/xx_types.o	./src/x_print.o		./src/o_types.o 	./src/x_types.o \
 	./src/initial.o		./src/p_print.o		./src/u_print.o		./src/u_types.o		./src/int_types.o \
 	./src/full_pre.o	./src/conv_s.o 		./src/conv_c.o		./src/ft_printf.o	./src/conv_p.o \
 	./src/conv_x.o 		./src/conv_xx.o 	./src/conv_i.o		./src/conv_u.o		./src/ft_utoa.o \
-	./src/conv_o.o 		./src/conv_d.o		./src/percent.o		./src/ft_ntoa.o \
+	./src/conv_o.o 		./src/conv_d.o		./src/percent.o		./src/ft_ntoa.o 	./src/conv_f.o \
+	./src/calc/_op_add.o	./src/calc/_op_mul.o	./src/calc/_op_pow.o \
 	./src/ft_untoa.o	./src/ft_itoa_base.o 	./src/ft_nputstr.o	./src/n_putstr.o  \
 	./src/n_putchar.o  $(LIB)
 HDR = -I ./src/include -I ./src/libft
 
 LIBFT = ./src/libft/libft.a
 
-CFLAGS = $(HDR) -Wall -Wextra -Werror
+CFLAGS = $(HDR) -Wall -Wextra -Werror -g
 
 CC = gcc
 
 all : FA $(NAME)
+	gcc libftprintf.a main.c
 
 $(NAME): $(OBJ)		
 		ar rc $(NAME) $(OBJ)

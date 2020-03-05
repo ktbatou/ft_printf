@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:46:47 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/03/05 16:40:27 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:42:35 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_check(char *str, int n, va_list op, t_valeur *v)
 	while (str[n])
 	{
 		v->j = 0;
-		while (v->j < 10)
+		while (v->j < 11)
 		{
 			if (data.flags[v->j] == str[n])
 			{

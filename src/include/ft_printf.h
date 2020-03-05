@@ -22,8 +22,8 @@
 
 typedef struct	s_date
 {
-	char	flags[10];
-	int		(*flag[10])(char *str, va_list s2, int n);
+	char	flags[11];
+	int		(*flag[11])(char *str, va_list s2, int n);
 }				t_data;
 
 typedef struct	s_detail
@@ -34,6 +34,7 @@ typedef struct	s_detail
 	int	plus;
 	int	zero;
 	int	space;
+	int	signe;
 	int	l;
 	int	h;
 
@@ -116,6 +117,7 @@ int				conv_d(char *str, va_list s2, int n);
 int				conv_xx(char *str, va_list s2, int n);
 int				print_p(t_valeur *v, char *str, t_detail d);
 int				conv_p(char *str, va_list s2, int n);
+int				conv_f(char *str, va_list s2, int n);
 int				flag_size(char *str, int n);
 int				get_details(char *s1, int i, t_unsigned_v vl, t_detail d);
 int				print_x(t_valeur *v, t_unsigned_v vl, t_detail d, t_detail det);
