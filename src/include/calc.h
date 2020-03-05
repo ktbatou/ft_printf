@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   calc.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amassnao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 16:25:12 by amassnao          #+#    #+#             */
-/*   Updated: 2020/03/05 16:25:19 by amassnao         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:48:39 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CALC_H
 # define CALC_H
-# include "../libft/libft.h"
-# include "../include/ft_printf.h"
+# include "libft.h"
+# include "ft_printf.h"
 # include <limits.h>
 
 typedef struct	s_float_rep

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   conv_f.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amassnao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:17:10 by amassnao          #+#    #+#             */
-/*   Updated: 2020/03/05 17:17:15 by amassnao         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:49:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "calc/calc.h"
+#include "calc.h"
 
 t_bool		ft_type(char *str)
 {

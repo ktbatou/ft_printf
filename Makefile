@@ -6,7 +6,7 @@
 #    By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
-#    Updated: 2020/02/10 15:50:15 by ktbatou          ###   ########.fr        #
+#    Updated: 2020/03/05 18:49:07 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ HDR = -I ./src/include -I ./src/libft
 
 LIBFT = ./src/libft/libft.a
 
-CFLAGS = $(HDR) -Wall -Wextra -Werror -g
+CFLAGS = $(HDR) -Wall -Wextra -Werror
 
 CC = gcc
 
