@@ -70,7 +70,7 @@ int		ft_check(char *str, int n, va_list op, t_valeur *v)
 
 void	fill_struct(t_data *data)
 {
-	ft_strcpy(data->flags, "csxpXdiuo%");
+	ft_strcpy(data->flags, "csxpXdiuo%f");
 	data->flag[0] = &conv_c;
 	data->flag[1] = &conv_s;
 	data->flag[2] = &conv_x;
@@ -81,4 +81,5 @@ void	fill_struct(t_data *data)
 	data->flag[7] = &conv_u;
 	data->flag[8] = &conv_o;
 	data->flag[9] = &percent;
+	data->flag[10] = &conv_f;
 }

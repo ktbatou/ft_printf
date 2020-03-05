@@ -134,5 +134,5 @@ void			print_nb(char *nb, char c, int minus);
 void			n_putchar(char c, t_valeur *v);
 void			n_putstr(char const *s, t_valeur *v);
 void			get_signe(t_detail detail, t_valeur *vlr);
-
+int				conv_f(char *str, va_list s2, int n);
 #endif
