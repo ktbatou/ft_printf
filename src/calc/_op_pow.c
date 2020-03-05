@@ -34,7 +34,6 @@ char *_op_pow(char *a, long b, int *len_out)
     len = ft_strlen(a);
     while (b > 0)
     {
-        ft_putendl("ok");
         if (b & 1)
         {
             _catcher = res;
@@ -43,14 +42,11 @@ char *_op_pow(char *a, long b, int *len_out)
         }
         if ((b >> 1) <= 0)
             return res;
-        //if ((b >> 1) & 1)
-        //{
-            _catcher = a;
-            a = _op_mul(a, a, (int []){len, len}, &len);
-            if (start_free)
-                free(_catcher);
-            start_free = 1;
-        //}
+        _catcher = a;
+        a = _op_mul(a, a, (int []){len, len}, &len);
+        if (start_free)
+            free(_catcher);
+        start_free = 1;
         b = b >> 1;
     }
     return res;

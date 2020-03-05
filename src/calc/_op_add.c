@@ -64,7 +64,7 @@ char *_op_add(char *a, char *b, int *params, int *len_out)
     while (b && *(b + 1) && *b == '0' && b++)
         (params && params[1]) ? params[1]-- : 0;
     _len_b = (params && params[0]) ? params[0] : ft_strlen(a);
-    _len_s = (params && params[0]) ? params[1] : ft_strlen(b);
+    _len_s = (params && params[1]) ? params[1] : ft_strlen(b);
     if (_len_s > _len_b)
     {
         _s_catcher = a;

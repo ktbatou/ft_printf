@@ -197,7 +197,9 @@ void     print_number_V2(char *num, int len, int point, long int after, t_bool h
             if (after - point >= 0 && after - point < len &&  is_bigger(num, after - point))
             {
                 _catcher = num;
-                num = _op_add("1", num, (int []){1, after - point}, &len);
+                //printf("===> p: %d, f: %ld ==> %ld\n", point, after, after - point);
+                num = _op_add("1", num, (int []){1, after - point + ((after == point) ? 1 : 0)}, &len);
+                //ft_putendl(num);
                 (is_all_nine(_catcher, after - point)) ? point-- : 0;
             }
             //point = (after == point) ? point - 1 : point;
@@ -321,9 +323,10 @@ int     print(char *str, int n, t_doubletofloatrep dfr)
     (dfr.f >= 0) ? d.signe = 1 : 0;
     f_detail(str, n, &v, &d);
     len_out = 0;
+    //ft_putendl(_op_mul("5500087877845", "554575455470000",(int []){0, 0}, &ch));
+    //return 0;
     inf_null(dfr, false) ? result = convesion_normalized(dfr, &len_out, (v.pre) ? ft_atol(v.pre, true, 6) : 6) : NULL;
     //ft_putendl(result);
-    //return 0;
     len = 0;
     ch = 0;
     (d.space && !d.plus && !dfr.fr.sign && ++ch) ? ft_putchar(' ') : 0;

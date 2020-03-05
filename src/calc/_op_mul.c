@@ -27,6 +27,14 @@ void _bigger_loop(char *result, char *b, char *s, int *params)
 	while (r_index >= 0)
 		result[r_index--] = '0';
 }
+
+/*int	 get_number(char *num, int index)
+{
+	return (int)num[index] - 48;
+}*/
+
+# define get_number(num, index) ((int)num[index] - 48)
+
 char *_smaller_loop(char *b, char *s, int *params, int *len_out)
 {
 	char *partial_result;
@@ -37,17 +45,19 @@ char *_smaller_loop(char *b, char *s, int *params, int *len_out)
 
 	result[0] = ft_strdup("0");
 	index = params[1];
+	*len_out = 1;
 	while (--index >= 0)
 	{
 		_fix = (params[1] - index - 1);
 		r_index = (params[0] + 1 + _fix);
+		params[2] = r_index;
 		partial_result = malloc(sizeof(char) * (r_index + 1));
 		partial_result[r_index--] = '\0';
 		while (_fix--)
 			partial_result[r_index--] = '0';
 		_bigger_loop(partial_result, b, s, (int []){index, params[0], params[1], r_index});
 		result[1] = result[0];
-		result[0] = _op_add(result[0], partial_result, (int []){0, r_index + 1}, len_out);
+		result[0] = _op_add(result[0], partial_result, (int []){*len_out, params[2]}, len_out);
 		free(result[1]);
 		free(partial_result);
 	}
@@ -76,5 +86,5 @@ char *_op_mul(char *a, char *b, int *params, int *len_out)
         len_b = len_s;
         len_s = _i_catcher;
     }
-	return _smaller_loop(a, b, (int []){len_b, len_s}, len_out);
+	return _smaller_loop(a, b, (int []){len_b, len_s, len_s}, len_out);
 }
