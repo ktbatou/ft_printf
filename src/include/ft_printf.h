@@ -6,7 +6,7 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 12:18:13 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/12 14:58:26 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:23:30 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_unsigned_v
 
 }				t_unsigned_v;
 
+void	fill_struct(t_data *data);
 void			initial_valeur(t_valeur *v);
 int				xx_cond(t_detail d, t_valeur *v, char *str, t_unsigned_v vl);
 t_detail		xx_flag(char *str, int n);

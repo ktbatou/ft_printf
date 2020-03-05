@@ -6,18 +6,11 @@
 /*   By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:46:47 by ktbatou           #+#    #+#             */
-/*   Updated: 2020/02/12 14:46:52 by ktbatou          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:40:27 by ktbatou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-const t_data g_struct =
-{
-	{"csxpXdiuo%"},
-	{&conv_c, &conv_s, &conv_x, &conv_p, &conv_xx,
-		&conv_d, &conv_i, &conv_u, &conv_o, &percent}
-};
 
 int		ft_printf(char *str, ...)
 {
@@ -54,7 +47,7 @@ int		ft_check(char *str, int n, va_list op, t_valeur *v)
 
 	v->a = 0;
 	v->i = n;
-	data = g_struct;
+	fill_struct(&data);
 	while (str[n])
 	{
 		v->j = 0;
@@ -73,4 +66,19 @@ int		ft_check(char *str, int n, va_list op, t_valeur *v)
 		n++;
 	}
 	return (n);
+}
+
+void	fill_struct(t_data *data)
+{
+	ft_strcpy(data->flags, "csxpXdiuo%");
+	data->flag[0] = &conv_c;
+	data->flag[1] = &conv_s;
+	data->flag[2] = &conv_x;
+	data->flag[3] = &conv_p;
+	data->flag[4] = &conv_xx;
+	data->flag[5] = &conv_d;
+	data->flag[6] = &conv_i;
+	data->flag[7] = &conv_u;
+	data->flag[8] = &conv_o;
+	data->flag[9] = &percent;
 }
