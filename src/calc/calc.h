@@ -50,4 +50,5 @@ t_bool			inf_null(t_doubletofloatrep dfr, t_bool verbose);
 void			ft_putchar_seq(char c, int seq);
 void			plus_minus(int sign);
 int				get_after(char *after);
+void			clean(t_valeur	*v, char **res);
 #endif

@@ -72,7 +72,7 @@ int			print(char *str, int n, t_doubletofloatrep dfr, int *p)
 	intial(&d, &v);
 	(dfr.f >= 0) ? d.signe = 1 : 0;
 	f_detail(str, n, &v, &d);
-	inf_null(dfr, false) ? result = convesion_normalized(dfr, &p[2]) : NULL;
+	result = inf_null(dfr, false) ? convesion_normalized(dfr, &p[2]) : NULL;
 	(d.space && !d.plus && !dfr.fr.sign && ++p[0]) ? ft_putchar(' ') : 0;
 	((dfr.fr.sign || d.plus) && (!d.minus && d.zero &&
 	inf_null(dfr, false)) && ++p[0]) ? plus_minus(dfr.fr.sign) : 0;
@@ -88,6 +88,7 @@ int			print(char *str, int n, t_doubletofloatrep dfr, int *p)
 	inf_null(dfr, true) ? printnumber(result,
 	(int[]){p[2], dfr.fr.exponent - 16383 - 63}, get_after(v.pre), d.hash) : 0;
 	(d.minus) ? ft_putchar_seq(' ', p[1]) : 0;
+	clean(&v, &result);
 	return (((p[1] > 0) ? p[1] : 0) + n);
 }
 
