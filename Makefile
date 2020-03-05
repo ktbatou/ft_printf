@@ -33,7 +33,8 @@ OBJ = ./src/print.o		./src/print_s.o		./src/xx_print.o		./src/negative_d_i.o \
 	./src/full_pre.o	./src/conv_s.o 		./src/conv_c.o		./src/ft_printf.o	./src/conv_p.o \
 	./src/conv_x.o 		./src/conv_xx.o 	./src/conv_i.o		./src/conv_u.o		./src/ft_utoa.o \
 	./src/conv_o.o 		./src/conv_d.o		./src/percent.o		./src/ft_ntoa.o 	./src/conv_f.o \
-	./src/calc/_op_add.o	./src/calc/_op_mul.o	./src/calc/_op_pow.o \
+	./src/calc/opadd.o	./src/calc/opmul.o	./src/calc/oppow.o  ./src/calc/kawtarfuncs.o 			\
+	./src/calc/calcfloat.o		./src/calc/additional.o \
 	./src/ft_untoa.o	./src/ft_itoa_base.o 	./src/ft_nputstr.o	./src/n_putstr.o  \
 	./src/n_putchar.o  $(LIB)
 HDR = -I ./src/include -I ./src/libft
