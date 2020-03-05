@@ -29,7 +29,7 @@ char	*oppow(char *a, long b, int *len_out)
 		(b & 1) ? res = opmul(res, a, (int[]){*len_out, len}, len_out) : 0;
 		(b & 1) ? free(catcher) : 0;
 		if ((b >> 1) <= 0)
-			return (res);
+			break ;
 		catcher = a;
 		a = opmul(a, a, (int[]){len, len}, &len);
 		if (start_free)
@@ -37,5 +37,6 @@ char	*oppow(char *a, long b, int *len_out)
 		start_free = 1;
 		b = b >> 1;
 	}
+	(start_free) ? free(a) : 0;
 	return (res);
 }

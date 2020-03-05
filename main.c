@@ -7,7 +7,7 @@
 int     main()
 {
     //double d = 11.46;
-    ft_printf(" %d\n", ft_printf("%.4000Lf", LDBL_MIN));
-    //printf(" %d\n", printf("%.4000Lf", LDBL_MIN));
+    ft_printf(" %d\n", ft_printf("%15.554f", 878787.7878));
+    printf(" %d\n", printf("%15.554f", 878787.7878));
     return (0);
 }   
