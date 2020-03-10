@@ -6,7 +6,7 @@
 #    By: ktbatou <ktbatou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 12:01:13 by ktbatou           #+#    #+#              #
-#    Updated: 2020/03/05 18:49:07 by ktbatou          ###   ########.fr        #
+#    Updated: 2020/03/05 20:59:07 by ktbatou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ CFLAGS = $(HDR) -Wall -Wextra -Werror
 CC = gcc
 
 all : FA $(NAME)
-	gcc libftprintf.a main.c
 
 $(NAME): $(OBJ)		
 		ar rc $(NAME) $(OBJ)
